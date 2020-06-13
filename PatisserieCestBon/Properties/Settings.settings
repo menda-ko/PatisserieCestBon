@@ -1,0 +1,408 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PatisserieCestBon.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="p001_error_Auth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された顧客IDまたはパスワードが誤っています。</Value>
+    </Setting>
+    <Setting Name="p001_error_Recuired" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客ID（パスワード）が入力されていません。</Value>
+    </Setting>
+    <Setting Name="p002_error_FormatTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号は「xxxx-yyyy-zzzz」の形式で入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_FormatEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">メールアドレスは「xxxx@yyyy」の形式で入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_CharTypeKana" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客担当者名かなは、 全角ひらがなで入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_CharTypeEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">メールアドレスは、半角英数字と記号で入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_CharTypeTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号は、半角数字と半角ハイフンで入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredCompanyName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">会社名を入力してください。</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">住所を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredCustomerName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">氏名（漢字）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredCustomerKana" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">氏名（かな）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_RecuiredPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_RequiredRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">確認用パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p002_error_MatchRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードが確認用パスワードと一致しません。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_ZeroQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量は0より大きい値を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_AppropriateQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫数量より多い数量を指定することはできません。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_AppropriateDeliveryDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">正しい希望納期を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_FormatQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量は整数で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_FormatDeliveryDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">希望納期は「yyyy/mm/dd」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p007_error_Recuired" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量（納期）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_Recuired" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量（納期）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_FormatQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量は整数で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_FormatDeliveryDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">希望納期は「yyyy/mm/dd」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_ZeroQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量は0より大きい値を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_CartReCheck" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量・納期を変更した場合は、再見積を実行してから注文ボタンを押してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_AppropriateDeliveryDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">正しい希望納期を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_AppropriateQuantity" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫が不足するため、ご注文を確定できません。
+</Value>
+    </Setting>
+    <Setting Name="p011_error_CannotCancel" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">出荷済の在庫があるため、このご注文はキャンセルできません。
+</Value>
+    </Setting>
+    <Setting Name="p013_error_Auth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された社員番号またはパスワードが誤っています。</Value>
+    </Setting>
+    <Setting Name="p013_error_Recuired" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">社員番号（パスワード）が入力されていません。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_NoMatch" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された条件に適合する受注情報は存在しません。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_FormatCustomerId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客IDは数値で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_FormatOrderNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">注文番号は数値で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_LengthCustomerId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客IDは6桁以内で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_LengthOrderNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">注文番号は6桁以内で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_FormatDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">納期（受注日時）のFrom・Toは「yyyy/mm/dd」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_AppropriateDeliveryDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">納期（From）は、納期（To）と同じか、それよりも前の日付を指定してください。
+</Value>
+    </Setting>
+    <Setting Name="p015_error_AppropriateOrderDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">受注日時（From）は、受注日時（To）と同じか、それよりも前の日付を指定してください。
+</Value>
+    </Setting>
+    <Setting Name="p017_error_ShortageStock" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫数量が不足しています。
+</Value>
+    </Setting>
+    <Setting Name="p019_info_UpdateSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫情報を更新しました。
+</Value>
+    </Setting>
+    <Setting Name="p020_error_StockAlreadyZero" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫数量の減少に失敗しました。
+</Value>
+    </Setting>
+    <Setting Name="p020_error_UpdateStock" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">在庫が不足するため減少できません。
+</Value>
+    </Setting>
+    <Setting Name="p020_error_CharTypeStock" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">数量には数値を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p020_error_FormatReceiptDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入荷予定日は「yyyy/mm/dd」形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p021_info_AddSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">担当者情報を登録しました。
+</Value>
+    </Setting>
+    <Setting Name="p021_info_UpdateSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">担当者情報を更新しました。
+</Value>
+    </Setting>
+    <Setting Name="p021_info_DeleteSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">担当者情報を削除しました。
+</Value>
+    </Setting>
+    <Setting Name="p021_error_AlreadyDeletedEmployee" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">該当の担当者情報はすでに削除されています。
+</Value>
+    </Setting>
+    <Setting Name="p021_error_NotChecked" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">削除を行う場合は、削除したい担当者を選択してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_DuplicatedEmployeeId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された社員番号はすでに登録されています。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_MatchRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードが確認用パスワードと一致しません。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_RecuiredRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">確認用パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_FormatEmployeeId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">社員番号は1000から始まる4桁の数値で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_CharTypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードは半角英数字と記号のみで入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_RecuiredEmpNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">社員番号を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_RecuiredEmpName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">担当者氏名を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p022_error_RecuiredPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p024_error_RecuiredEmpName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">担当者氏名を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p024_error_RecuiredPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p024_error_MatchRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードが確認用パスワードと一致しません。
+</Value>
+    </Setting>
+    <Setting Name="p024_error_RequiredRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">確認用パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p024_error_CharTypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードは半角英数字と記号のみで入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p027_info_UpdateSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客情報を更新しました。
+</Value>
+    </Setting>
+    <Setting Name="p027_info_DeleteSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客情報を削除しました。
+</Value>
+    </Setting>
+    <Setting Name="p027_error_AlreadyDeletedCustomer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">該当の顧客情報はすでに削除されています。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_Inappropriate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された情報が不正です。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_FormatTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号は「xxxx-yyyy-zzzz」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_FormatEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">メールアドレスは「xxxx@yyyy」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_CharTypeKana" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">顧客担当者名かなは、 全角ひらがなで入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_CharTypeEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">メールアドレスは、半角英数字と記号で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_CharTypeTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号は、半角数字と半角ハイフンで入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredCompanyName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">会社名を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">住所を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredTelNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">電話番号を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredCustomerName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">氏名（漢字）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredCustomerKana" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">氏名（かな）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RecuiredPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_RequiredRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">確認用パスワードを入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p028_error_MatchRetypePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">パスワードが確認用パスワードと一致しません。
+</Value>
+    </Setting>
+    <Setting Name="p031_info_AddSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品情報を登録しました。
+</Value>
+    </Setting>
+    <Setting Name="p031_info_UpdateSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品情報を更新しました。
+</Value>
+    </Setting>
+    <Setting Name="p031_info_DeleteSuccess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品情報を削除しました。
+</Value>
+    </Setting>
+    <Setting Name="p031_error_ThereIsStockOrOrder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">その商品は削除できません。
+</Value>
+    </Setting>
+    <Setting Name="p031_error_AlreadyDeletedItem" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">該当商品情報はすでに削除されています。
+</Value>
+    </Setting>
+    <Setting Name="p031_error_NotChecked" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">削除を行う場合は、削除したい商品を選択してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_DupulicatedItem" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された商品番号または商品名はすでに登録されています。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_FormatItemNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品番号は4桁の整数で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_FormatUnitPrice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">単価は整数で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_FormatSize" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">寸法は「〇〇x〇〇」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_RecuiredItemNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品番号を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_RecuiredItemName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品名を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_RecuiredPhotoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品画像（URL）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_RecuiredUnitPrice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">単価を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p032_error_RecuiredSize" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">寸法を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_RecuiredItemName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品名を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_RecuiredPhotoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品画像（URL）を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_RecuiredUnitPrice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">単価を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_RecuiredSize" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">寸法を入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_DupulicatedItem" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">入力された商品名はすでに登録されています。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_FormatUnitPrice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">単価は整数で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_FormatSize" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">寸法は「〇〇x〇〇」の形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p009_error_CartReCheckDelete" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品を削除する場合は、再見積を実行してから注文ボタンを押してください。</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
