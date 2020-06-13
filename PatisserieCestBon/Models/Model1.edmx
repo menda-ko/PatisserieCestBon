@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="numeric" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="telNo" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="customerKana" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="dept" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="empNo" />
+          </Key>
+          <Property Name="empNo" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="empName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="itemNo" />
+          </Key>
+          <Property Name="itemNo" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="size" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="photoUrl" Type="varchar" MaxLength="255" />
+          <Property Name="unitPrice" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="assortment" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="deleteFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderInfo">
+          <Key>
+            <PropertyRef Name="orderNo" />
+            <PropertyRef Name="orderSeqNo" />
+          </Key>
+          <Property Name="orderNo" Type="numeric" Precision="6" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderSeqNo" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="itemNo" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="quantity" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="deliveryDate" Type="date" Nullable="false" />
+          <Property Name="orderDate" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="customerId" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="itemNo" />
+          </Key>
+          <Property Name="itemNo" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="stock" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="receiptDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__Stock__itemNo__2F10007B">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="itemNo" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="itemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Item_itemNo">
+          <End Role="Item" Type="Self.Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="itemNo" />
+            </Principal>
+            <Dependent Role="OrderInfo">
+              <PropertyRef Name="itemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderInfo" EntityType="Self.OrderInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Stock__itemNo__2F10007B" Association="Self.FK__Stock__itemNo__2F10007B">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Item_itemNo" Association="Self.fk_Item_itemNo">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="OrderInfo" EntitySet="OrderInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Decimal" Precision="6" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telNo" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerKana" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dept" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="empNo" />
+          </Key>
+          <Property Name="empNo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="empName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="itemNo" />
+          </Key>
+          <Property Name="itemNo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="size" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="photoUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="unitPrice" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="assortment" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deleteFlag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Stock" Relationship="Self.FK__Stock__itemNo__2F10007B" FromRole="Item" ToRole="Stock" />
+          <NavigationProperty Name="OrderInfoes" Relationship="Self.fk_Item_itemNo" FromRole="Item" ToRole="OrderInfo" />
+        </EntityType>
+        <EntityType Name="OrderInfo">
+          <Key>
+            <PropertyRef Name="orderNo" />
+            <PropertyRef Name="orderSeqNo" />
+          </Key>
+          <Property Name="orderNo" Type="Decimal" Precision="6" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderSeqNo" Type="Decimal" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="itemNo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="deliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerId" Type="Decimal" Precision="6" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.fk_Item_itemNo" FromRole="OrderInfo" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="itemNo" />
+          </Key>
+          <Property Name="itemNo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="itemName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stock1" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="receiptDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__Stock__itemNo__2F10007B" FromRole="Stock" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK__Stock__itemNo__2F10007B">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="itemNo" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="itemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Item_itemNo">
+          <End Role="Item" Type="Self.Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="itemNo" />
+            </Principal>
+            <Dependent Role="OrderInfo">
+              <PropertyRef Name="itemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="OrderInfoes" EntityType="Self.OrderInfo" />
+          <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <AssociationSet Name="FK__Stock__itemNo__2F10007B" Association="Self.FK__Stock__itemNo__2F10007B">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Item_itemNo" Association="Self.fk_Item_itemNo">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="OrderInfo" EntitySet="OrderInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DatabaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="telNo" ColumnName="telNo" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerKana" ColumnName="customerKana" />
+                <ScalarProperty Name="dept" ColumnName="dept" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DatabaseModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="empNo" ColumnName="empNo" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="DatabaseModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="itemNo" ColumnName="itemNo" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="photoUrl" ColumnName="photoUrl" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="assortment" ColumnName="assortment" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="deleteFlag" ColumnName="deleteFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInfoes">
+            <EntityTypeMapping TypeName="DatabaseModel.OrderInfo">
+              <MappingFragment StoreEntitySet="OrderInfo">
+                <ScalarProperty Name="orderNo" ColumnName="orderNo" />
+                <ScalarProperty Name="orderSeqNo" ColumnName="orderSeqNo" />
+                <ScalarProperty Name="itemNo" ColumnName="itemNo" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="DatabaseModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="itemNo" ColumnName="itemNo" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="stock1" ColumnName="stock" />
+                <ScalarProperty Name="receiptDate" ColumnName="receiptDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="なし" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
