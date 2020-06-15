@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ぱてぃすりー＝せぼん</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <table border="1" align="center">
+        <tr>
+            <th colspan="2" style="text-align:center; font-size:larger">
+                <div style="margin-right:30px; margin-left:30px">
+                    <img src="~/Content/images/petisserie_cest_bon_logo.png"
+                         alt="ぱてぃすりー＝せぼんロゴ"
+                         width="570" height="95" />
+                    商品発注システム
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td style="width:200px">
+                <div style="text-align:center; margin-top:20px;">
+                    メニュー
+                    <hr style="background-color:black; height:1px; width:70%">
+                </div>
+                <ul>
+                    <li>@Html.ActionLink("カタログを見る", "Catalog", "Item")</li>
+                    <li>@Html.ActionLink("見積確認", "CartCheck", "Cart") </li>
+                    <li>@Html.ActionLink("発注済ステータス確認", "StatusCheck", "Cart") </li>
+                    <li>@Html.ActionLink("ログアウト", "CustomerLogout", "Login")
+                </ul>
+            </td>
+            <td style="text-align:center">
+                @RenderBody()
+            </td>
+        </tr>
+    </table>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
