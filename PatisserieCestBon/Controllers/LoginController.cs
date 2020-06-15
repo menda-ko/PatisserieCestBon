@@ -14,7 +14,7 @@ namespace PatisserieCestBon.Controllers
     public class LoginController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
-        // その１　顧客
+        // その１　フロントエンド
         public ActionResult CustomerMenu()
         {
             string session = (string)Session["loginusername"];
@@ -94,10 +94,69 @@ namespace PatisserieCestBon.Controllers
         FormsAuthentication.SignOut();
         return Redirect("CustomerLogin");
     }
+
+        /* その２　バックオフィス
+         *  フロントエンドとほぼ同じなのでコメントは省略 */
     public ActionResult EmployeeMenu()
         {
-            // 担当者メニュー画面を表示
+            string session = (string)Session["loginusername"];
+            if (session == null)
+            {
+                return Redirect("EmployeeLogin");
+            }
             return View();
+        }
+        
+        [AllowAnonymous]
+        public ActionResult EmployeeLogin()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("EmployeeMenu");
+            }
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmployeeLogin([Bind(Include = "empNo, password")] Employee model)
+        {
+            string session = (string)Session["loginusername"];
+            if (session == null)
+            {
+                if (ModelState.IsValid && model.empNo != null && model.password != null)
+                {
+                    if (ValidateUser(model))
+                    {
+                        FormsAuthentication.SetAuthCookie(userName: model.empName, createPersistentCookie: false);
+                        Session["loginusername"] = model.empName;
+                        return RedirectToAction(actionName: "EmployeeMenu");
+                    }
+                    ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p013_error_Auth;
+                    return View(model);
+                }
+                ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p013_error_Recuired;
+                return View(model);
+            }
+            return RedirectToAction(actionName: "EmployeeMenu");
+        }
+
+        private bool ValidateUser(Employee model)
+        {
+            var user = db.Employees
+                .Where(u => u.empNo == model.empNo && u.password == model.password)
+                .FirstOrDefault();
+            return user != null;
+        }
+
+        public ActionResult EmployeeLogout()
+        {
+            if (Session != null)
+            {
+                Session.Remove("loginusername");
+            }
+            FormsAuthentication.SignOut();
+            return Redirect("EmployeeLogin");
         }
     }
 }

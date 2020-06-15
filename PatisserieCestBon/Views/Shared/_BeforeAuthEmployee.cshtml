@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ぱてぃすりー＝せぼん</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <table border="1" align="center">
+        <tr>
+            <th>
+                <div style="margin-right:30px; margin-left:30px; text-align:center">
+                    <img src="~/Content/images/petisserie_cest_bon_logo.png"
+                         alt="ぱてぃすりー＝せぼんロゴ"
+                         width="570" height="95" />
+                    <p style="font-size:large"><b>ぱてぃすりー＝せぼん　受発注管理システム</b></p>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td style="text-align:center">
+                @RenderBody()
+            </td>
+        </tr>
+    </table>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
