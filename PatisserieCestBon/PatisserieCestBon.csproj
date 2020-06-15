@@ -241,13 +241,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Login\CustomerMenu.cshtml" />
+    <Content Include="Views\Login\EmployeeMenu.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Customer\" />
     <Folder Include="Views\Employee\" />
     <Folder Include="Views\Item\" />
-    <Folder Include="Views\Login\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>

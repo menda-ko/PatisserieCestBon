@@ -8,22 +8,15 @@ namespace PatisserieCestBon.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Index()
+        public ActionResult CustomerMenu()
         {
+            // 顧客メニュー画面を表示
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult EmployeeMenu()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            // 担当者メニュー画面を表示
             return View();
         }
     }
