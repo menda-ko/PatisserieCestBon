@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.Item>
+
+@{
+    ViewBag.Title = "商品情報メンテナンス";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+    <h3>商品情報メンテナンス</h3>
+
+<p style="padding:10px">
+    商品情報のメンテナンスを行います。<br>
+    新規に取扱商品を追加する場合は、「商品追加」ボタンを押してください。<br>
+    登録済み商品の情報を変更するには、商品名のリンクをクリックしてください。<br>
+    商品を削除する場合は、リストの右にある「削除」をチェックし、「削除」ボタンを押してください。<br>
+</p>
+<table border="1" align="center">
+    <tr>
+        <th style="text-align:center">
+            商品番号
+        </th>
+        <th style="text-align:center">
+            商品名
+        </th>
+        <th style="text-align:center">
+            単価
+        </th>
+        <th style="text-align:center">
+            寸法
+        </th>
+        <th style="text-align:center">
+            種別
+        </th>
+        <th style="text-align:center">
+            カテゴリー
+        </th>
+        <th style="text-align:center">
+            削除
+        </th>
+    </tr>
+
+@foreach (var item in ViewBag.ItemList) {
+<tr>
+    <td>
+        @item.itemNo
+    </td>
+    <td>
+        @item.itemName
+    </td>
+    <td>
+        @item.unitPrice
+    </td>
+    <td>
+        @item.size
+    </td>
+    <td>
+        @item.assortment
+    </td>
+    <td>
+        @item.category
+    </td>
+    <td>
+        check box
+    </td>
+</tr>
+}
+</table>
+<br>
