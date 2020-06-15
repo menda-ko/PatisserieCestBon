@@ -245,6 +245,8 @@
     <Content Include="Views\Login\EmployeeMenu.cshtml" />
     <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
+    <Content Include="Views\Login\CustomerLogin.cshtml" />
+    <Content Include="Views\Shared\_BeforeAuthCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
