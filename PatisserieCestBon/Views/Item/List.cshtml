@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PatisserieCestBon.Models.Item>
 
 @{
-    ViewBag.Title = "商品情報メンテナンス";
+    ViewBag.Title = "商品一覧";
     Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
 
@@ -13,6 +13,18 @@
     登録済み商品の情報を変更するには、商品名のリンクをクリックしてください。<br>
     商品を削除する場合は、リストの右にある「削除」をチェックし、「削除」ボタンを押してください。<br>
 </p>
+
+@*インフォメッセージがある場合は表示*@
+@if (!string.IsNullOrEmpty(ViewBag.InfoMessage))
+{
+    <p class="text-info">@ViewBag.InfoMessage</p>
+}
+@*エラーメッセージがある場合は表示*@
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+
 <table border="1" align="center">
     <tr>
         <th style="text-align:center">
