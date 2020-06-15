@@ -241,6 +241,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Stock\StockList.cshtml" />
+    <Content Include="Views\Stock\StockUpdate1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
@@ -249,7 +251,6 @@
     <Folder Include="Views\Item\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Order\" />
-    <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
