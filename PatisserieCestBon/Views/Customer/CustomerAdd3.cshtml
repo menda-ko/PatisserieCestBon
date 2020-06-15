@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CustomerAdd3</title>
+</head>
+<body>
+    <div align="center">
+        <p>
+            システムの利用登録を完了しました。<br />
+            お客様の顧客IDは、@ViewBag.customerId です。<br /><br />
+            ログイン時には、顧客IDとパスワードが必要となりますので、<br />
+            顧客IDを忘れないようにご注意ください。
+        </p><br /><br />
+        <input type="button" value="ログイン画面を表示" onclick="Login/CustomerLogin" />
+    </div>
+</body>
+</html>

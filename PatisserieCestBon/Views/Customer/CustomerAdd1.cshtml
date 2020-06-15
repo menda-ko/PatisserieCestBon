@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    
+    <title>CustomerAdd1</title>
+</head>
+<body>
+    <div align ="center">
+        <p>システムの利用登録を行います。<br />
+        下記の情報を入力して、送信ボタンを押してください</p>
+
+        <form action="/Customer/CustomerAdd2" method="post">
+            会社情報<br />
+            会社名　　　　　<input type="text" name="companyName" required maxlength="255" size="30"><br /><br />
+            住所　　　　　　<input type="text" name="address" required maxlength="255" size="30"><br /><br />
+            電話番号　　　　<input type="text" name="telNo" required maxlength="255" size="30"><br /><br />
+            ご担当者情報<br /><br />
+            氏名(漢字)　　　<input type="text" name="customerName" required maxlength="255" size="30"><br /><br />
+            氏名(かな)　　　<input type="text" name="customerKana" required maxlength="255" size="30"><br /><br />
+            部署　　　 　 　<input type="text" name="dept" required maxlength="255" size="30"><br /><br />
+            メールアドレス　<input type="text" name="email" required maxlength="255" size="30"><br /><br />
+            認証用情報<br /><br />
+            パスワード　　  <input type="password" name="password" required maxlength="255" size="30"><br /><br />
+            パスワード(確認)<input type="password" name="checkPass" required maxlength="255" size="30"><br /><br />
+            <input type="submit" value="送信" /><input type="reset" value="リセット" />
+        </form>
+    </div>
+</body>
+</html>
