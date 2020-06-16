@@ -18,7 +18,7 @@ namespace PatisserieCestBon.Controllers
             var itemList = db.Items
                 .Where(i => i.deleteFlag.Equals(false));
             ViewBag.ItemList = itemList;
-            return View();
+            return View("List");
         }
         // ★商品一覧表示（バックオフィス）ここまで★
 
@@ -97,11 +97,8 @@ namespace PatisserieCestBon.Controllers
                 db.SaveChanges();
             //登録成功のメッセージ
                 ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_AddSuccess;
-            // 商品一覧に戻るため、削除フラグFalseの商品リストを取得
-            var itemList = db.Items
-                .Where(i => i.deleteFlag.Equals(false));
-            ViewBag.ItemList = itemList;
-            return View("List");
+            // 商品一覧に戻るため、同じコントローラ内のList()メソッドを呼び出し
+            return List();
             }
         // ★商品追加登録（Add1～Add3）ここまで★
 
@@ -143,11 +140,8 @@ namespace PatisserieCestBon.Controllers
             db.SaveChanges();
             // 更新成功のメッセージ
             ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_UpdateSuccess;
-            // 商品一覧に戻るため、削除フラグFalseの商品リストを取得
-            var itemList = db.Items
-                .Where(i => i.deleteFlag.Equals(false));
-            ViewBag.ItemList = itemList;
-            return View("List");
+            // 商品一覧に戻るため、同じコントローラ内のList()メソッドを呼び出し
+            return List();
         }
 
         // ★商品削除（Delete1～Delete2）ここから★
@@ -155,11 +149,10 @@ namespace PatisserieCestBon.Controllers
         {
             if (itemNoList == null)
             {
+                // チェックボックスに1つもチェックが入っていない場合のエラーメッセージ
                 ViewBag.ErrorMessage = PatisserieCestBon.Properties.Settings.Default.p031_error_NotChecked;
-                var itemList = db.Items
-                    .Where(i => i.deleteFlag.Equals(false));
-                ViewBag.ItemList = itemList;
-                return View("List");
+                // 商品一覧に戻るため、同じコントローラ内のList()メソッドを呼び出し
+                return List();
             }
             else 
             {
@@ -179,11 +172,10 @@ namespace PatisserieCestBon.Controllers
                 db.Items.Remove(db.Items.Find(itemNo));
             }
             db.SaveChanges();
+            // 削除成功のメッセージ
             ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_DeleteSuccess;
-            var itemList = db.Items
-                .Where(i => i.deleteFlag.Equals(false));
-            ViewBag.ItemList = itemList;
-            return View("List");
+            // 商品一覧に戻るため、同じコントローラ内のList()メソッドを呼び出し
+            return List();
         }
         // ★商品削除（Delete1～Delete2）ここまで★
     }
