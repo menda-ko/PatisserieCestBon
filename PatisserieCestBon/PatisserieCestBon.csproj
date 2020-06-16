@@ -251,6 +251,7 @@
     <Content Include="Views\Shared\_BeforeAuthEmployee.cshtml" />
     <Content Include="Views\Item\List.cshtml" />
     <Content Include="Views\Item\Add1.cshtml" />
+    <Content Include="Views\Item\Add2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
