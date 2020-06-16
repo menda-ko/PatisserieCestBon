@@ -169,7 +169,14 @@ namespace PatisserieCestBon.Controllers
         {
                 foreach (var itemNo in itemNoList)
             {
-                db.Items.Remove(db.Items.Find(itemNo));
+                var item = db.Items.Find(itemNo);
+                if(item.deleteFlag == true)
+                {
+                    // 削除しようとした商品がすでに削除されていた場合、エラーメッセージを一覧に表示
+                    ViewBag.ErrorMessage = PatisserieCestBon.Properties.Settings.Default.p031_error_AlreadyDeletedItem;
+                    return List();
+                }
+                item.deleteFlag = true;
             }
             db.SaveChanges();
             // 削除成功のメッセージ
