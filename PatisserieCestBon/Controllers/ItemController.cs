@@ -149,5 +149,42 @@ namespace PatisserieCestBon.Controllers
             ViewBag.ItemList = itemList;
             return View("List");
         }
+
+        // ★商品削除（Delete1～Delete2）ここから★
+        public ActionResult Delete1(int[] itemNoList)
+        {
+            if (itemNoList == null)
+            {
+                ViewBag.ErrorMessage = PatisserieCestBon.Properties.Settings.Default.p031_error_NotChecked;
+                var itemList = db.Items
+                    .Where(i => i.deleteFlag.Equals(false));
+                ViewBag.ItemList = itemList;
+                return View("List");
+            }
+            else 
+            {
+                List<Item> deleteItemList = new List<Item>();
+                foreach (var itemNo in itemNoList)
+                {
+                    deleteItemList.Add(db.Items.Find(itemNo));
+                    ViewBag.DeleteItemList = deleteItemList;
+                }
+                return View();
+            }
+        }
+        public ActionResult Delete2(int[] itemNoList)
+        {
+                foreach (var itemNo in itemNoList)
+            {
+                db.Items.Remove(db.Items.Find(itemNo));
+            }
+            db.SaveChanges();
+            ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_DeleteSuccess;
+            var itemList = db.Items
+                .Where(i => i.deleteFlag.Equals(false));
+            ViewBag.ItemList = itemList;
+            return View("List");
+        }
+        // ★商品削除（Delete1～Delete2）ここまで★
     }
 }

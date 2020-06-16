@@ -1,0 +1,67 @@
+﻿@model PatisserieCestBon.Models.Item
+
+@{
+    ViewBag.Title = "商品削除確認";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h3>商品情報メンテナンス</h3>
+
+<p style="padding:10px">
+    下記の商品情報を削除します。<br>
+    内容を確認の上、「削除」ボタンを押してください。<br>
+</p>
+
+<form>
+    <table border="1" align="center">
+        <tr>
+            <th style="text-align:center">
+                商品番号
+            </th>
+            <th style="text-align:center">
+                商品名
+            </th>
+            <th style="text-align:center">
+                単価
+            </th>
+            <th style="text-align:center">
+                寸法
+            </th>
+            <th style="text-align:center">
+                種別
+            </th>
+            <th style="text-align:center">
+                カテゴリー
+            </th>
+        </tr>
+
+         @foreach (var deleteItem in ViewBag.DeleteItemList)
+         {
+        <tr>
+            <td style="text-align:left">
+                @deleteItem.itemNo.ToString("0000")
+                <input type="hidden" name="itemNoList[]" value="@deleteItem.itemNo">
+            </td>
+            <td style="text-align:left">
+                @deleteItem.itemName
+            </td>
+            <td style="text-align:left">
+                &yen;@String.Format("{0:#,0}-", @deleteItem.unitPrice)
+            </td>
+            <td style="text-align:left">
+                @deleteItem.size@("cm")
+            </td>
+            <td style="text-align:left">
+                @deleteItem.assortment
+            </td>
+            <td style="text-align:left">
+                @deleteItem.category
+            </td>
+        </tr>
+        }
+    </table>
+    <br>
+    <input type="submit" value="削除" formaction="/Item/Delete2" formmethod="post">
+    <input type="submit" value="戻る" formaction="/Item/List" formmethod="post">
+</form>
+<br>
