@@ -74,7 +74,8 @@
                     @item.category
                 </td>
                 <td style="text-align:center">
-                    <input type="checkbox" name="itemNoList[]" value="@item.itemNo" >
+                    <input type="checkbox" name="itemNoList[]" value="@item.itemNo">
+                    @* name="itemNoList[]"にすることで、複数のitemNoを配列で渡すことができる *@
                 </td>
             </tr>
         }
