@@ -1,15 +1,15 @@
 ﻿@model PatisserieCestBon.Models.Item
 
 @{
-    ViewBag.Title = "商品追加確認";
+    ViewBag.Title = "商品更新確認";
     Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
 
 <h3>商品情報メンテナンス</h3>
 
 <p style="padding:10px">
-    以下の内容で商品情報を登録します。<br>
-    登録内容を確認の上、「登録」ボタンを押してください。<br>
+    以下の内容で商品情報を更新します。<br>
+    更新内容を確認の上、「更新」ボタンを押してください。<br>
 </p>
 
 <form>
@@ -19,8 +19,8 @@
                 商品番号
             </th>
             <td style="text-align:left">
-                @ViewBag.model.itemNo
-                <input type="hidden" name="itemNo" value="@ViewBag.model.itemNo">
+                @ViewBag.model.itemNo.ToString("0000")
+                <input type="hidden" name="id" value="@ViewBag.model.itemNo">
             </td>
         </tr>
         <tr>
@@ -79,7 +79,7 @@
         </tr>
     </table>
     <br>
-    <input type="submit" formaction="/Item/Add3" formmethod="post" value="登録">
+    <input type="submit" formaction="/Item/Update3" formmethod="post" value="登録">
     @* ↓onclick="history.back()"で、入力値を保持したまま入力画面に戻れる *@
     <input type="button" onclick="history.back()" formmethod="post" value="戻る">
 </form>

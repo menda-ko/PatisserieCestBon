@@ -55,7 +55,7 @@
         {
             <tr>
                 <td style="text-align:left">
-                    @item.itemNo
+                    @item.itemNo.ToString("0000")
                 </td>
                 <td style="text-align:left">
                     <a href="/Item/Update1/@item.itemNo">@item.itemName</a>
@@ -65,7 +65,7 @@
                     &yen;@String.Format("{0:#,0}-", @item.unitPrice)
                 </td>
                 <td style="text-align:left">
-                    @item.size cm
+                    @item.size@("cm")
                 </td>
                 <td style="text-align:left">
                     @item.assortment

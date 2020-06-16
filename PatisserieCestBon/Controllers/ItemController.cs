@@ -77,7 +77,6 @@ namespace PatisserieCestBon.Controllers
                 , category = category
             };
             ViewBag.model = item;
-            Session["newItem"] = item;
             return View();
         }
         // Add3 … Itemテーブルに商品を登録
@@ -96,12 +95,59 @@ namespace PatisserieCestBon.Controllers
                 };
                 db.Items.Add(item);
                 db.SaveChanges();
+            //登録成功のメッセージ
                 ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_AddSuccess;
+            // 商品一覧に戻るため、削除フラグFalseの商品リストを取得
             var itemList = db.Items
                 .Where(i => i.deleteFlag.Equals(false));
             ViewBag.ItemList = itemList;
             return View("List");
             }
         // ★商品追加登録（Add1～Add3）ここまで★
+
+        // ★商品更新（Update1～Update3）ここから★
+        public ActionResult Update1(int id)
+        {
+            // 更新対象の商品情報をDBから取得して入力画面に渡す
+            ViewBag.Item = db.Items.Find(id);
+            return View();
+        }
+        public ActionResult Update2(int id, string itemName, string size, string photoUrl, int unitPrice,
+            string assortment, string category)
+        {
+            // 更新入力画面で入力した情報を確認力画面に渡す
+            var item = new Item()
+            {
+                itemNo = id
+                ,itemName = itemName
+                ,size = size
+                ,photoUrl = photoUrl
+                ,unitPrice = unitPrice
+                ,assortment = assortment
+                ,category = category
+            };
+            ViewBag.model = item;
+            return View();
+        }
+        public ActionResult Update3(int id, string itemName, string size, string photoUrl, int unitPrice,
+            string assortment, string category)
+        {
+            // 更新確認画面から送信された内容でDBを更新する
+            var item = db.Items.Find(id);
+            item.itemName = itemName;
+            item.size = size;
+            item.photoUrl = photoUrl;
+            item.unitPrice = unitPrice;
+            item.assortment = assortment;
+            item.category = category;
+            db.SaveChanges();
+            // 更新成功のメッセージ
+            ViewBag.InfoMessage = PatisserieCestBon.Properties.Settings.Default.p031_info_UpdateSuccess;
+            // 商品一覧に戻るため、削除フラグFalseの商品リストを取得
+            var itemList = db.Items
+                .Where(i => i.deleteFlag.Equals(false));
+            ViewBag.ItemList = itemList;
+            return View("List");
+        }
     }
 }
