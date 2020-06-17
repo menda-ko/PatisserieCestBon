@@ -15,14 +15,14 @@
 </p>
 
 @*インフォメッセージがある場合は表示*@
-@if (!string.IsNullOrEmpty(ViewBag.InfoMessage))
-{
-    <p class="text-info">@ViewBag.InfoMessage</p>
-}
+    @if (!string.IsNullOrWhiteSpace(ViewBag.InfoMessage))
+    {
+        <p class="text-info">@ViewBag.InfoMessage</p>
+    }
 @*エラーメッセージがある場合は表示*@
-@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
 {
-    <p class="text-danger">@ViewBag.ErrorMessage</p>
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
 }
 
 <form>

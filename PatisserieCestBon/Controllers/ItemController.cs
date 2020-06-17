@@ -27,7 +27,7 @@ namespace PatisserieCestBon.Controllers
         // Add1 … 商品追加入力画面へ
         public ActionResult Add1()
         {
-            return View();
+            return View("Add1");
         }
         // Add2 … 商品追加確認画面へ
         public ActionResult Add2(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
@@ -51,7 +51,22 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Add3(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
-                var item = new Item()
+            // エラーメッセージを格納するリストを作成
+            List<string> errorMessageList = new List<string>();
+            // 商品番号または商品名の重複チェック
+            var itemDupulicate = db.Items
+                .Where(i => (i.itemNo.Equals(itemNo)) | (i.itemName.Equals(itemName)));
+            // どちらかが重複していた場合は入力画面に戻ってエラーメッセージ表示
+            if (itemDupulicate.Count() > 0)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_DupulicatedItem);
+                ViewBag.ErrorMessageList = errorMessageList;
+                // エラーメッセージリストの要素数を渡す
+                int lengthOfErrorMessageList = errorMessageList.Count();
+                ViewBag.LengthOfErrorMessageList = lengthOfErrorMessageList;
+                return Add1();
+            }
+            var item = new Item()
                 {
                     itemNo = itemNo
                     ,itemName = itemName

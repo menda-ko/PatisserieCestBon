@@ -12,11 +12,15 @@
     登録内容を入力して、「送信」ボタンを押してください。<br>
 </p>
 
-@*エラーメッセージがある場合は表示
-    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessageList))
+@*エラーメッセージがある場合は表示*@
+@if (ViewBag.LengthOfErrorMessageList > 0)
+{
+    foreach (var errorMessage in ViewBag.ErrorMessageList)
     {
-        <p class="text-danger">@ViewBag.ErrorMessageList</p>
-    }*@
+        <p class="text-danger">@errorMessage</p><br>
+    }
+}
+
 <form>
     <table border="1" align="center" width="400px">
         <tr>
