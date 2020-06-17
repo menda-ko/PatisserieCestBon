@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.OrderInfo>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StatusCheck</title>
+</head>
+<body>
+    <h2>ご注文ステータス確認</h2>
+    <a>現在ご注文いただいている商品のステータスは以下のとおりです。</a>
+    <a>発送済み商品のないご注文については、キャンセルが可能です。</a><br />
+    @foreach (var orderInfo in Model)
+    {
+        decimal orderNo = orderInfo.orderNo;
+        decimal itemNo = orderInfo.itemNo;
+        <a>ご注文番号:@orderNo.ToString("000000")</a><input name="cancel" type="submit" value="この注文をキャンセル" />
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>希望納期</th>
+                <th>ステータス</th>
+            </tr>
+
+            <tr>
+                <td>@itemNo.ToString("0000")</td>
+                <td>@Html.DisplayFor(model => orderInfo.itemName)</td>
+                <td>@Html.DisplayFor(model => orderInfo.quantity)</td>
+                <td>@Html.DisplayFor(model => orderInfo.deliveryDate)</td>
+                <td>@Html.DisplayFor(model => orderInfo.status)</td>
+            </tr>
+        </table>
+    }
+</body>
+</html>
