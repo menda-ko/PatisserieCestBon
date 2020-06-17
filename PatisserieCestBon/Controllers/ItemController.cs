@@ -3,6 +3,7 @@ using PatisserieCestBon.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -33,22 +34,78 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Add2(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
+            // エラーメッセージ格納リスト作成
+            List<string> errorMessageList = new List<string>();
             // 入力内容チェック
-            // 必須項目が空欄になっていないかどうかの確認
-
-            // ここまででエラーがない場合、確認画面に表示するために値を渡す
-            var item = new Item()
+            // 商品番号（必須）
+            if (itemNo == null)
             {
-                itemNo = itemNo
-                , itemName = itemName
-                , size = size
-                , photoUrl = photoUrl
-                , unitPrice = unitPrice
-                , assortment = assortment
-                , category = category
-            };
-            ViewBag.model = item;
-            return View("Add2");
+                errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemNo);
+            }
+            // 商品番号が入力されていた場合、桁数とフォーマットのチェック
+            else 
+            {
+                // 商品番号を文字列化して桁数と整数かどうかのチェック
+                string itemNoString = itemNo.ToString();
+                if (itemNoString.Length != 4 || int.TryParse(itemNoString, out int itemNoIntCheck) == false)
+                {
+                    errorMessageList.Add(Properties.Settings.Default.p032_error_FormatItemNo);
+                }
+            }
+            // 商品名（必須）
+            if (string.IsNullOrWhiteSpace(itemName))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemName);
+            }
+            // 単価（必須）
+            if (unitPrice == null)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredUnitPrice);
+            }
+            else
+            {
+                // 単価を文字列化して整数かどうかのチェック
+                string unitPriceString = unitPrice.ToString();
+                if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
+                {
+                    errorMessageList.Add(Properties.Settings.Default.p032_error_FormatUnitPrice);
+                }
+            }
+            // 寸法（必須）
+            if (string.IsNullOrWhiteSpace(size))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredSize);
+            }
+            /* 寸法が入力されていた場合、フォーマットをチェック
+             * 「半角数字x半角数字」の形式*/
+            else if (Regex.IsMatch(size, "^[0-9]+[x][0-9]+$") == false)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_FormatSize);
+            }
+            // ここまででエラーがあった場合、エラーメッセージリストとその件数を渡して入力画面に戻る
+            int errorMessageListCount = errorMessageList.Count();
+            if (errorMessageListCount > 0)
+            {
+                ViewBag.LengthOfErrorMessageList = errorMessageListCount;
+                ViewBag.ErrorMessageList = errorMessageList;
+                return View("Add1");
+            }
+            // ここまででエラーがない場合、確認画面に表示するために値を渡す
+            else
+            {
+                var item = new Item()
+                {
+                    itemNo = itemNo
+                    ,itemName = itemName
+                    ,size = size
+                    ,photoUrl = photoUrl
+                    ,unitPrice = unitPrice
+                    ,assortment = assortment
+                    ,category = category
+                };
+                ViewBag.model = item;
+                return View("Add2");
+            }
         }
         // Add3 … 商品テーブルと在庫テーブルにレコードを登録
         public ActionResult Add3(int itemNo, string itemName, string size, string photoUrl, int unitPrice,

@@ -17,11 +17,10 @@
 {
     foreach (var errorMessage in ViewBag.ErrorMessageList)
     {
-        <p class="text-danger">@errorMessage</p>
-        <br>
+        <div class="text-danger">@errorMessage</div>
     }
 }
-
+<br>
 <form>
     <table border="1" align="center" width="400px">
         <tr>
