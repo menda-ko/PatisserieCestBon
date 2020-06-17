@@ -949,5 +949,14 @@ namespace PatisserieCestBon.Properties {
                 return ((string)(this["p009_error_CartReCheckDelete"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("商品画像（URL）はURLの形式で入力してください。\r\n")]
+        public string p032_error_FormatPhotoUrl {
+            get {
+                return ((string)(this["p032_error_FormatPhotoUrl"]));
+            }
+        }
     }
 }

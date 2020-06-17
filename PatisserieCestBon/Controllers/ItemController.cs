@@ -57,6 +57,16 @@ namespace PatisserieCestBon.Controllers
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemName);
             }
+            // 商品画像URL（必須）
+            if (string.IsNullOrWhiteSpace(photoUrl))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredPhotoUrl);
+            }
+            // 商品画像URLが入力されていた場合、フォーマットチェック
+            else if (Regex.IsMatch(size, "^[/][a-zA-Z_0-9]+[/][a-zA-Z_0-9]+[a-zA-Z_0-9][.][a-z]$") == false)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p032_error_FormatPhotoUrl);
+            }
             // 単価（必須）
             if (unitPrice == null)
             {
@@ -64,7 +74,7 @@ namespace PatisserieCestBon.Controllers
             }
             else
             {
-                // 単価を文字列化して整数かどうかのチェック
+                // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
                 string unitPriceString = unitPrice.ToString();
                 if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
                 {
