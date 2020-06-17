@@ -408,5 +408,8 @@
       <Value Profile="(Default)">商品画像（URL）はURLの形式で入力してください。
 </Value>
     </Setting>
+    <Setting Name="p034_error_FormatPhotoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品画像（URL）はURLの形式で入力してください。</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

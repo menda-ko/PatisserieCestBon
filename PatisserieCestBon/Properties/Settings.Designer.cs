@@ -958,5 +958,14 @@ namespace PatisserieCestBon.Properties {
                 return ((string)(this["p032_error_FormatPhotoUrl"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("商品画像（URL）はURLの形式で入力してください。")]
+        public string p034_error_FormatPhotoUrl {
+            get {
+                return ((string)(this["p034_error_FormatPhotoUrl"]));
+            }
+        }
     }
 }
