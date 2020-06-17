@@ -66,11 +66,11 @@ namespace PatisserieCestBon.Controllers
                         return RedirectToAction(actionName: "CustomerMenu");
                     }
                     // IDまたはパスワードが誤っていた場合は画面遷移せずエラーメッセージを表示
-                    ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p001_error_Auth;
+                    ViewBag.Message = Properties.Settings.Default.p001_error_Auth;
                     return View(model);
                 }
                 // IDまたはパスワードが空欄だった場合は画面遷移せずエラーメッセージを表示
-                ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p001_error_Recuired;
+                ViewBag.Message = Properties.Settings.Default.p001_error_Recuired;
                 return View(model);
             }
             // セッションが空でなければメニュー画面にリダイレクト
@@ -132,10 +132,10 @@ namespace PatisserieCestBon.Controllers
                         Session["loginusername"] = model.empName;
                         return RedirectToAction(actionName: "EmployeeMenu");
                     }
-                    ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p013_error_Auth;
+                    ViewBag.Message = Properties.Settings.Default.p013_error_Auth;
                     return View(model);
                 }
-                ViewBag.Message = PatisserieCestBon.Properties.Settings.Default.p013_error_Recuired;
+                ViewBag.Message = Properties.Settings.Default.p013_error_Recuired;
                 return View(model);
             }
             return RedirectToAction(actionName: "EmployeeMenu");
