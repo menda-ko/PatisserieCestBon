@@ -33,7 +33,10 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Add2(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
-            // 確認画面に表示するために値を渡す
+            // 入力内容チェック
+            // 必須項目が空欄になっていないかどうかの確認
+
+            // ここまででエラーがない場合、確認画面に表示するために値を渡す
             var item = new Item()
             {
                 itemNo = itemNo
@@ -45,7 +48,7 @@ namespace PatisserieCestBon.Controllers
                 , category = category
             };
             ViewBag.model = item;
-            return View();
+            return View("Add2");
         }
         // Add3 … 商品テーブルと在庫テーブルにレコードを登録
         public ActionResult Add3(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
@@ -64,7 +67,7 @@ namespace PatisserieCestBon.Controllers
                 // エラーメッセージリストの要素数を渡す
                 int lengthOfErrorMessageList = errorMessageList.Count();
                 ViewBag.LengthOfErrorMessageList = lengthOfErrorMessageList;
-                return Add1();
+                return Add2(itemNo, itemName, size, photoUrl, unitPrice, assortment, category);
             }
             var item = new Item()
                 {
@@ -99,7 +102,7 @@ namespace PatisserieCestBon.Controllers
         {
             // 更新対象の商品情報をDBから取得して入力画面に渡す
             ViewBag.Item = db.Items.Find(id);
-            return View();
+            return View("Update1");
         }
         // Update2 … 更新入力画面で入力した情報を確認画面に渡す
         public ActionResult Update2(int id, string itemName, string size, string photoUrl, int unitPrice,
@@ -116,12 +119,14 @@ namespace PatisserieCestBon.Controllers
                 ,category = category
             };
             ViewBag.model = item;
-            return View();
+            return View("Update2");
         }
         // Update3 … DBを更新し一覧画面に戻る
         public ActionResult Update3(int id, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
+            // エラーメッセージを格納するリストを作成
+            List<string> errorMessageList = new List<string>();
             var item = db.Items.Find(id);
             if (item.deleteFlag == true)
             {
@@ -132,7 +137,20 @@ namespace PatisserieCestBon.Controllers
             }
             else
             {
-                // 削除フラグがFalseだった場合、更新確認画面から送信された内容でDBを更新する
+                // 削除フラグがFalseだった場合、商品名の重複チェック
+                var itemNameDupulicate = db.Items
+                    .Where(i => i.itemName.Equals(itemName));
+                // 商品名が重複していた場合は入力画面に戻ってエラーメッセージ表示
+                if (itemNameDupulicate.Count() > 0)
+                {
+                    errorMessageList.Add(Properties.Settings.Default.p034_error_DupulicatedItem);
+                    ViewBag.ErrorMessageList = errorMessageList;
+                    // エラーメッセージリストの要素数を渡す
+                    int lengthOfErrorMessageList = errorMessageList.Count();
+                    ViewBag.LengthOfErrorMessageList = lengthOfErrorMessageList;
+                    return Update2(id, itemName, size, photoUrl, unitPrice, assortment, category);
+                }
+                // ここまででエラーがなかった場合、送信された内容でDBを更新する
                 item.itemName = itemName;
                 item.size = size;
                 item.photoUrl = photoUrl;
@@ -186,7 +204,7 @@ namespace PatisserieCestBon.Controllers
                     }
                 }
                 ViewBag.DeleteItemList = deleteItemList;
-                return View();
+                return View("Delete1");
             }
         }
         // Delete2 … 商品の削除（商品テーブルの削除フラグをTrueに更新）
@@ -199,8 +217,8 @@ namespace PatisserieCestBon.Controllers
                 {
                     // 削除しようとした商品がすでに削除されていた（＝削除フラグがTrue）場合のエラーメッセージ
                     ViewBag.ErrorMessage = Properties.Settings.Default.p031_error_AlreadyDeletedItem;
-                    // 商品一覧に戻るため、同じコントローラ内のList()メソッドを呼び出し
-                    return List();
+                    // 削除確認画面に戻る
+                    return Delete1(itemNoList);
                 }
                 item.deleteFlag = true;
             }

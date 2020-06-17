@@ -12,6 +12,16 @@
     更新内容を入力して、「送信」ボタンを押してください。<br>
 </p>
 
+@*エラーメッセージがある場合は表示*@
+@if (ViewBag.LengthOfErrorMessageList > 0)
+{
+    foreach (var errorMessage in ViewBag.ErrorMessageList)
+    {
+        <p class="text-danger">@errorMessage</p>
+        <br>
+    }
+}
+
 <form>
     <table border="1" align="center" width="400px">
         <tr>
@@ -52,7 +62,7 @@
                 寸法
             </th>
             <td style="text-align:left">
-                <input type="text" name="size"  value="@ViewBag.Item.size">
+                <input type="text" name="size" value="@ViewBag.Item.size">
             </td>
         </tr>
         <tr>

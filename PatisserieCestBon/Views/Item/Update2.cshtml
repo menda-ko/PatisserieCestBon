@@ -12,6 +12,16 @@
     更新内容を確認の上、「更新」ボタンを押してください。<br>
 </p>
 
+@*エラーメッセージがある場合は表示*@
+@if (ViewBag.LengthOfErrorMessageList > 0)
+{
+    foreach (var errorMessage in ViewBag.ErrorMessageList)
+    {
+        <p class="text-danger">@errorMessage</p>
+        <br>
+    }
+}
+
 <form>
     <table border="1" align="center" width="400px">
         <tr>
@@ -81,6 +91,6 @@
     <br>
     <input type="submit" formaction="/Item/Update3" formmethod="post" value="登録">
     @* ↓onclick="history.back()"で、入力値を保持したまま入力画面に戻れる *@
-    <input type="button" onclick="history.back()" formmethod="post" value="戻る">
+    <input type="submit" formaction="/Item/Update1" formmethod="post" value="戻る">
 </form>
 <br>
