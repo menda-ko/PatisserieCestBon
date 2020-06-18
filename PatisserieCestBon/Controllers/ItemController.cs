@@ -31,21 +31,20 @@ namespace PatisserieCestBon.Controllers
             return View("Add1");
         }
         // Add2 … 商品追加確認画面へ
-        public ActionResult Add2(int? itemNo, string itemName, string size, string photoUrl, int? unitPrice,
+        public ActionResult Add2(string itemNo, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
             // 入力内容チェック
             // 商品番号（必須）
-            string itemNoString = itemNo.ToString();
-            if (itemNo.Equals(null))
+            if (string.IsNullOrWhiteSpace(itemNo))
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemNo);
             }
             // 商品番号が入力されていた場合、桁数とフォーマットのチェック
             //else if (int.TryParse(itemNoString, out int itemNoIntCheck) == false
-            else if (Regex.IsMatch(itemNoString, "^[0-9]{4}$") == false)
+            else if (Regex.IsMatch(itemNo, "^[0-9]{4}$") == false)
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_FormatItemNo);
             }
@@ -66,15 +65,14 @@ namespace PatisserieCestBon.Controllers
                 errorMessageList.Add(Properties.Settings.Default.p032_error_FormatPhotoUrl);
             }
             // 単価（必須）
-            if (unitPrice.Equals(null))
+            if (string.IsNullOrWhiteSpace(unitPrice))
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredUnitPrice);
             }
             else
             {
                 // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
-                string unitPriceString = unitPrice.ToString();
-                if (Regex.IsMatch(unitPriceString, "^[0-9]+$") == false)
+                if (Regex.IsMatch(unitPrice, "^[0-9]+$") == false)
                 // if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
                 {
                     errorMessageList.Add(Properties.Settings.Default.p032_error_FormatUnitPrice);
@@ -102,25 +100,29 @@ namespace PatisserieCestBon.Controllers
             // ここまででエラーがない場合、確認画面に表示するために値を渡す
             else
             {
+                //int.TryParse(itemNo, out int itemNoInt);
+                int.TryParse(unitPrice, out int unitPriceInt);
                 ViewBag.itemNo = itemNo;
                 ViewBag.itemName = itemName;
                 ViewBag.size = size;
                 ViewBag.photoUrl = photoUrl;
-                ViewBag.unitPrice = unitPrice;
+                ViewBag.unitPrice = unitPriceInt;
                 ViewBag.assortment = assortment;
                 ViewBag.category = category;
                 return View("Add2");
             }
         }
         // Add3 … 商品テーブルと在庫テーブルにレコードを登録
-        public ActionResult Add3(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
+        public ActionResult Add3(string itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
+            // 商品番号をintに変換したものを作成
+            int.TryParse(itemNo, out int itemNoInt);
             // エラーメッセージを格納するリストを作成
             List<string> errorMessageList = new List<string>();
             // 商品番号または商品名の重複チェック
             var itemDupulicate = db.Items
-                .Where(i => (i.itemNo.Equals(itemNo)) | (i.itemName.Equals(itemName)));
+                .Where(i => (i.itemNo.Equals(itemNoInt)) | (i.itemName.Equals(itemName)));
             // どちらかが重複していた場合は入力画面に戻ってエラーメッセージ表示
             if (itemDupulicate.Count() > 0)
             {
@@ -129,11 +131,11 @@ namespace PatisserieCestBon.Controllers
                 // エラーメッセージリストの要素数を渡す
                 int lengthOfErrorMessageList = errorMessageList.Count();
                 ViewBag.LengthOfErrorMessageList = lengthOfErrorMessageList;
-                return Add2(itemNo, itemName, size, photoUrl, unitPrice, assortment, category);
+                return Add2(itemNo, itemName, size, photoUrl, unitPrice.ToString(), assortment, category);
             }
             var item = new Item()
                 {
-                    itemNo = itemNo
+                    itemNo = itemNoInt
                     ,itemName = itemName
                     ,size = size
                     ,photoUrl = photoUrl
@@ -146,7 +148,7 @@ namespace PatisserieCestBon.Controllers
              （数量・入荷予定日はそれぞれデフォルトで0と・NULLが入る） */
             var newItemStock = new Stock()
             {
-                itemNo = itemNo
+                itemNo = itemNoInt
                 ,itemName = itemName
             };
             db.Stocks.Add(newItemStock);

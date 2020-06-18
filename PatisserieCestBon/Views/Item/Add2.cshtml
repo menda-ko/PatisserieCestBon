@@ -28,7 +28,7 @@
                 商品番号
             </th>
             <td style="text-align:left">
-                @ViewBag.itemNo.ToString("0000")
+                @String.Format("{0:D4}", @ViewBag.itemNo)
                 <input type="hidden" name="itemNo" value="@ViewBag.itemNo">
             </td>
         </tr>
