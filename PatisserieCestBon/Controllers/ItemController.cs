@@ -43,7 +43,6 @@ namespace PatisserieCestBon.Controllers
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemNo);
             }
             // 商品番号が入力されていた場合、桁数とフォーマットのチェック
-            //else if (int.TryParse(itemNoString, out int itemNoIntCheck) == false
             else if (Regex.IsMatch(itemNo, "^[0-9]{4}$") == false)
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_FormatItemNo);
@@ -71,9 +70,8 @@ namespace PatisserieCestBon.Controllers
             }
             else
             {
-                // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
+                // 単価が入力されていた場合、整数かどうかのチェック
                 if (Regex.IsMatch(unitPrice, "^[0-9]+$") == false)
-                // if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
                 {
                     errorMessageList.Add(Properties.Settings.Default.p032_error_FormatUnitPrice);
                 }
@@ -100,7 +98,7 @@ namespace PatisserieCestBon.Controllers
             // ここまででエラーがない場合、確認画面に表示するために値を渡す
             else
             {
-                //int.TryParse(itemNo, out int itemNoInt);
+                // 単価を文字列から数値に変換。商品番号は文字列のまま
                 int.TryParse(unitPrice, out int unitPriceInt);
                 ViewBag.itemNo = itemNo;
                 ViewBag.itemName = itemName;
@@ -116,7 +114,7 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Add3(string itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
-            // 商品番号をintに変換したものを作成
+            // 商品番号をintに変換（のちの重複チェック・DB登録の際に使用）
             int.TryParse(itemNo, out int itemNoInt);
             // エラーメッセージを格納するリストを作成
             List<string> errorMessageList = new List<string>();
@@ -169,7 +167,7 @@ namespace PatisserieCestBon.Controllers
             return View("Update1");
         }
         // Update2 … 更新入力画面で入力した情報を確認画面に渡す
-        public ActionResult Update2(int id, string itemName, string size, string photoUrl, int? unitPrice,
+        public ActionResult Update2(int id, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
             // エラーメッセージ格納リスト作成
@@ -192,16 +190,14 @@ namespace PatisserieCestBon.Controllers
                 errorMessageList.Add(Properties.Settings.Default.p034_error_FormatPhotoUrl);
             }
             // 単価（必須）
-            if (unitPrice.Equals(null))
+            if (string.IsNullOrWhiteSpace(unitPrice))
             {
                 errorMessageList.Add(Properties.Settings.Default.p034_error_RecuiredUnitPrice);
             }
             else
             {
-                // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
-               string unitPriceString = unitPrice.ToString();
-                //if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
-                if(Regex.IsMatch(unitPriceString, "^[0-9]+$") == false)
+                // 単価が入力されていた場合、整数かどうかのチェック
+                if(Regex.IsMatch(unitPrice, "^[0-9]+$") == false)
                 {
                     errorMessageList.Add(Properties.Settings.Default.p034_error_FormatUnitPrice);
                 }
@@ -239,7 +235,7 @@ namespace PatisserieCestBon.Controllers
             }
         }
         // Update3 … DBを更新し一覧画面に戻る
-        public ActionResult Update3(int id, string itemName, string size, string photoUrl, int unitPrice,
+        public ActionResult Update3(int id, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
             // エラーメッセージを格納するリストを作成
@@ -268,10 +264,12 @@ namespace PatisserieCestBon.Controllers
                     return Update2(id, itemName, size, photoUrl, unitPrice, assortment, category);
                 }
                 // ここまででエラーがなかった場合、送信された内容でDBを更新する
+                // 単価を数値に変換
+                int.TryParse(unitPrice, out int unitPriceInt);
                 item.itemName = itemName;
                 item.size = size;
                 item.photoUrl = photoUrl;
-                item.unitPrice = unitPrice;
+                item.unitPrice = unitPriceInt;
                 item.assortment = assortment;
                 item.category = category;
                 db.SaveChanges();
