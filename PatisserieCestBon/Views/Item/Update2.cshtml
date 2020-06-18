@@ -29,8 +29,8 @@
                 商品番号
             </th>
             <td style="text-align:left">
-                @ViewBag.model.itemNo.ToString("0000")
-                <input type="hidden" name="id" value="@ViewBag.model.itemNo">
+                @ViewBag.itemNo.ToString("0000")
+                <input type="hidden" name="id" value="@ViewBag.itemNo">
             </td>
         </tr>
         <tr>
@@ -38,8 +38,8 @@
                 商品名
             </th>
             <td style="text-align:left">
-                @ViewBag.model.itemName
-                <input type="hidden" name="itemName" value="@ViewBag.model.itemName">
+                @ViewBag.itemName
+                <input type="hidden" name="itemName" value="@ViewBag.itemName">
             </td>
         </tr>
         <tr>
@@ -47,8 +47,8 @@
                 商品画像
             </th>
             <td style="text-align:center">
-                <img src="@ViewBag.model.photoUrl" alt="商品画像" />
-                <input type="hidden" name="photoUrl" value="@ViewBag.model.photoUrl">
+                <img src="@ViewBag.photoUrl" alt="商品画像" />
+                <input type="hidden" name="photoUrl" value="@ViewBag.photoUrl">
             </td>
         </tr>
         <tr>
@@ -56,8 +56,8 @@
                 単価
             </th>
             <td style="text-align:left">
-                &yen;@String.Format("{0:#,0}-", @ViewBag.model.unitPrice)
-                <input type="hidden" name="unitPrice" value="@ViewBag.model.unitPrice">
+                &yen;@String.Format("{0:#,0}-", @ViewBag.unitPrice)
+                <input type="hidden" name="unitPrice" value="@ViewBag.unitPrice">
             </td>
         </tr>
         <tr>
@@ -65,8 +65,8 @@
                 寸法
             </th>
             <td style="text-align:left">
-                @ViewBag.model.size@("cm")
-                <input type="hidden" name="size" value="@ViewBag.model.size">
+                @ViewBag.size@("cm")
+                <input type="hidden" name="size" value="@ViewBag.size">
             </td>
         </tr>
         <tr>
@@ -74,8 +74,8 @@
                 種別
             </th>
             <td style="text-align:left">
-                @ViewBag.model.assortment
-                <input type="hidden" name="assortment" value="@ViewBag.model.assortment">
+                @ViewBag.assortment
+                <input type="hidden" name="assortment" value="@ViewBag.assortment">
             </td>
         </tr>
         <tr>
@@ -83,8 +83,8 @@
                 カテゴリー
             </th>
             <td style="text-align:left">
-                @ViewBag.model.category
-                <input type="hidden" name="category" value="@ViewBag.model.category">
+                @ViewBag.category
+                <input type="hidden" name="category" value="@ViewBag.category">
             </td>
         </tr>
     </table>

@@ -31,26 +31,23 @@ namespace PatisserieCestBon.Controllers
             return View("Add1");
         }
         // Add2 … 商品追加確認画面へ
-        public ActionResult Add2(int itemNo, string itemName, string size, string photoUrl, int unitPrice,
+        public ActionResult Add2(int? itemNo, string itemName, string size, string photoUrl, int? unitPrice,
             string assortment, string category)
         {
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
             // 入力内容チェック
             // 商品番号（必須）
-            if (itemNo == null)
+            string itemNoString = itemNo.ToString();
+            if (itemNo.Equals(null))
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredItemNo);
             }
             // 商品番号が入力されていた場合、桁数とフォーマットのチェック
-            else 
+            //else if (int.TryParse(itemNoString, out int itemNoIntCheck) == false
+            else if (Regex.IsMatch(itemNoString, "^[0-9]{4}$") == false)
             {
-                // 商品番号を文字列化して桁数と整数かどうかのチェック
-                string itemNoString = itemNo.ToString();
-                if (itemNoString.Length != 4 || int.TryParse(itemNoString, out int itemNoIntCheck) == false)
-                {
-                    errorMessageList.Add(Properties.Settings.Default.p032_error_FormatItemNo);
-                }
+                errorMessageList.Add(Properties.Settings.Default.p032_error_FormatItemNo);
             }
             // 商品名（必須）
             if (string.IsNullOrWhiteSpace(itemName))
@@ -62,13 +59,14 @@ namespace PatisserieCestBon.Controllers
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredPhotoUrl);
             }
-            // 商品画像URLが入力されていた場合、フォーマットチェック
-            else if (Regex.IsMatch(size, "^[/][a-zA-Z_0-9]+[/][a-zA-Z_0-9]+[a-zA-Z_0-9][.][a-z]$") == false)
+            /* 商品画像URLが入力されていた場合、フォーマットチェック
+             * /Content/images/XXXXX.拡張子 のような形で記入 */
+            else if (Regex.IsMatch(photoUrl, "^/[a-zA-Z_0-9]+/[a-zA-Z_0-9]+/[a-zA-Z_0-9]+[.][a-z]+$") == false)
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_FormatPhotoUrl);
             }
             // 単価（必須）
-            if (unitPrice == null)
+            if (unitPrice.Equals(null))
             {
                 errorMessageList.Add(Properties.Settings.Default.p032_error_RecuiredUnitPrice);
             }
@@ -76,7 +74,8 @@ namespace PatisserieCestBon.Controllers
             {
                 // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
                 string unitPriceString = unitPrice.ToString();
-                if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
+                if (Regex.IsMatch(unitPriceString, "^[0-9]+$") == false)
+                // if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
                 {
                     errorMessageList.Add(Properties.Settings.Default.p032_error_FormatUnitPrice);
                 }
@@ -103,17 +102,13 @@ namespace PatisserieCestBon.Controllers
             // ここまででエラーがない場合、確認画面に表示するために値を渡す
             else
             {
-                var item = new Item()
-                {
-                    itemNo = itemNo
-                    ,itemName = itemName
-                    ,size = size
-                    ,photoUrl = photoUrl
-                    ,unitPrice = unitPrice
-                    ,assortment = assortment
-                    ,category = category
-                };
-                ViewBag.model = item;
+                ViewBag.itemNo = itemNo;
+                ViewBag.itemName = itemName;
+                ViewBag.size = size;
+                ViewBag.photoUrl = photoUrl;
+                ViewBag.unitPrice = unitPrice;
+                ViewBag.assortment = assortment;
+                ViewBag.category = category;
                 return View("Add2");
             }
         }
@@ -172,21 +167,74 @@ namespace PatisserieCestBon.Controllers
             return View("Update1");
         }
         // Update2 … 更新入力画面で入力した情報を確認画面に渡す
-        public ActionResult Update2(int id, string itemName, string size, string photoUrl, int unitPrice,
+        public ActionResult Update2(int id, string itemName, string size, string photoUrl, int? unitPrice,
             string assortment, string category)
         {
-            var item = new Item()
+            // エラーメッセージ格納リスト作成
+            List<string> errorMessageList = new List<string>();
+            // 入力内容チェック
+            // 商品名（必須）
+            if (string.IsNullOrWhiteSpace(itemName))
             {
-                itemNo = id
-                ,itemName = itemName
-                ,size = size
-                ,photoUrl = photoUrl
-                ,unitPrice = unitPrice
-                ,assortment = assortment
-                ,category = category
-            };
-            ViewBag.model = item;
-            return View("Update2");
+                errorMessageList.Add(Properties.Settings.Default.p034_error_RecuiredItemName);
+            }
+            // 商品画像URL（必須）
+            if (string.IsNullOrWhiteSpace(photoUrl))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p034_error_RecuiredPhotoUrl);
+            }
+            /* 商品画像URLが入力されていた場合、フォーマットチェック
+             * /Content/images/XXXXX.拡張子 のような形で記入 */
+            else if (Regex.IsMatch(photoUrl, "^/[a-zA-Z_0-9]+/[a-zA-Z_0-9]+/[a-zA-Z_0-9]+[.][a-z]+$") == false)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p034_error_FormatPhotoUrl);
+            }
+            // 単価（必須）
+            if (unitPrice.Equals(null))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p034_error_RecuiredUnitPrice);
+            }
+            else
+            {
+                // 単価が入力されていた場合、単価を文字列化して整数かどうかのチェック
+               string unitPriceString = unitPrice.ToString();
+                //if (int.TryParse(unitPriceString, out int unitPriceIntCheck) == false)
+                if(Regex.IsMatch(unitPriceString, "^[0-9]+$") == false)
+                {
+                    errorMessageList.Add(Properties.Settings.Default.p034_error_FormatUnitPrice);
+                }
+            }
+            // 寸法（必須）
+            if (string.IsNullOrWhiteSpace(size))
+            {
+                errorMessageList.Add(Properties.Settings.Default.p034_error_RecuiredSize);
+            }
+            /* 寸法が入力されていた場合、フォーマットをチェック
+             * 0～9の数字n桁、半角英字x、0～9の数字n桁 が連結された形であることを確認 */
+            else if (Regex.IsMatch(size, "^[0-9]+[x][0-9]+$") == false)
+            {
+                errorMessageList.Add(Properties.Settings.Default.p034_error_FormatSize);
+            }
+            // ここまででエラーがあった場合、エラーメッセージのリストとその要素数を渡して入力画面に戻る
+            int errorMessageListCount = errorMessageList.Count();
+            if (errorMessageListCount > 0)
+            {
+                ViewBag.LengthOfErrorMessageList = errorMessageListCount;
+                ViewBag.ErrorMessageList = errorMessageList;
+                return Update1(id);
+            }
+            // エラーがなければ更新確認画面に値を渡す
+            else
+            {
+                ViewBag.itemNo = id;
+                ViewBag.itemName = itemName;
+                ViewBag.size = size;
+                ViewBag.photoUrl = photoUrl;
+                ViewBag.unitPrice = unitPrice;
+                ViewBag.assortment = assortment;
+                ViewBag.category = category;
+                return View("Update2");
+            }
         }
         // Update3 … DBを更新し一覧画面に戻る
         public ActionResult Update3(int id, string itemName, string size, string photoUrl, int unitPrice,
