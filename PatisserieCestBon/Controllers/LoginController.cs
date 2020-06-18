@@ -17,8 +17,8 @@ namespace PatisserieCestBon.Controllers
         // その１　フロントエンド
         public ActionResult CustomerMenu()
         {
-            string session = (string)Session["loginusername"];
-            if (session == null)
+            string sessionId = (string)Session["loginUserName"];
+            if (sessionId == null)
             {
                 // セッションが空だったらログイン画面にリダイレクト
                 return Redirect("CustomerLogin");
@@ -39,57 +39,65 @@ namespace PatisserieCestBon.Controllers
                 return View("CustomerMenu");
             }
             // 認証されていない場合、ログイン画面を表示
-            return View();
+            return View("CustomerLogin");
         }
 
         // 認証を行うメソッド
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CustomerLogin([Bind(Include = "customerId, password")] Customer model)
+        public ActionResult CustomerLogin(string inputCustomerId, string inputPassword)
         {
-            string session = (string)Session["loginusername"];
-            if (session == null)
+            string sessionId = (string)Session["loginUserName"];
+            if (sessionId == null)
             {
                 // セッションが空だったら認証処理開始
-                if (ModelState.IsValid && model.customerId != null && model.password != null)
+                if (!string.IsNullOrWhiteSpace(inputCustomerId) && !string.IsNullOrWhiteSpace(inputPassword))
                 {
-                    /* IDとパスワード両方入力されていた場合、DBと照合開始。
+                    /* IDとパスワード両方入力されていた場合、DBと照合開始（ValidateUser）
                      * 一致するレコードがあれば認証成功 → メニュー画面を表示 */
-                    if (ValidateUser(model))
+                    if (ValidateUser(inputCustomerId, inputPassword))
                     {
-                        FormsAuthentication.SetAuthCookie(userName: model.customerName, createPersistentCookie: false);
+                        FormsAuthentication.SetAuthCookie(userName: inputCustomerId, createPersistentCookie: false);
                         /* userName … 認証済みユーザの名前
                          * create～～ … 複数のブラウザーセッションにわたって保存される
                          *                     永続的なクッキーを作成する場合はtrue。それ以外の場合はfalse */
-                        Session["loginusername"] = model.customerName;      // セッションに認証済みユーザのIDを格納
+                        Session["loginUserName"] = inputCustomerId;      // セッションに認証済みユーザの名前を格納
                         return RedirectToAction(actionName: "CustomerMenu");
                     }
                     // IDまたはパスワードが誤っていた場合は画面遷移せずエラーメッセージを表示
-                    ViewBag.Message = Properties.Settings.Default.p001_error_Auth;
-                    return View(model);
+                    ViewBag.ErrorMessage = Properties.Settings.Default.p001_error_Auth;
+                    return View("CustomerLogin");
                 }
                 // IDまたはパスワードが空欄だった場合は画面遷移せずエラーメッセージを表示
-                ViewBag.Message = Properties.Settings.Default.p001_error_Recuired;
-                return View(model);
+                ViewBag.ErrorMessage = Properties.Settings.Default.p001_error_Recuired;
+                return View("CustomerLogin");
             }
             // セッションが空でなければメニュー画面にリダイレクト
             return RedirectToAction(actionName: "CustomerMenu");
         }
 
-        private bool ValidateUser(Customer model)
+        private bool ValidateUser(string inputCustomerId, string inputPassword)
         {
-            var user = db.Customers
-                .Where(u => u.customerId == model.customerId && u.password == model.password)
-                .FirstOrDefault();      // FirstOrDefault() … 要素が見つからない場合は規定値（ここではnull）を返す
-            return user != null;
+            foreach (var customer in db.Customers)
+            {
+                /* DBに登録されている顧客IDをすべて6桁0埋めした文字列に加工して照合。 
+                * 入力されたIDとパスワードともに一致するものがあれば認証完了 */
+                string customerIdString = customer.customerId.ToString("000000");
+                if (customerIdString == inputCustomerId && customer.password == inputPassword)
+                {
+                    return customer != null;
+                }
+            }
+            // ID・パスワード両方一致するレコードがなければ認証失敗
+            return false;
         }
 
-    public ActionResult CustomerLogout()
+        public ActionResult CustomerLogout()
     {
         if (Session != null)
         {
-            Session.Remove("loginusername");  // セッションのキーを削除
+            Session.Remove("loginUserName");  // セッションのキーを削除
         }
         FormsAuthentication.SignOut();
         return Redirect("CustomerLogin");
@@ -99,8 +107,8 @@ namespace PatisserieCestBon.Controllers
          *  フロントエンドとほぼ同じなのでコメントは省略 */
     public ActionResult EmployeeMenu()
         {
-            string session = (string)Session["loginusername"];
-            if (session == null)
+            string sessionId = (string)Session["loginUserName"];
+            if (sessionId == null)
             {
                 return Redirect("EmployeeLogin");
             }
@@ -121,21 +129,21 @@ namespace PatisserieCestBon.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EmployeeLogin([Bind(Include = "empNo, password")] Employee model)
         {
-            string session = (string)Session["loginusername"];
-            if (session == null)
+            string sessionId = (string)Session["loginUserName"];
+            if (sessionId == null)
             {
-                if (ModelState.IsValid && model.empNo != null && model.password != null)
+                if (ModelState.IsValid && model.empNo.Equals(null) && model.password.Equals(null))
                 {
                     if (ValidateUser(model))
                     {
                         FormsAuthentication.SetAuthCookie(userName: model.empName, createPersistentCookie: false);
-                        Session["loginusername"] = model.empName;
+                        Session["loginUserName"] = model.empName;
                         return RedirectToAction(actionName: "EmployeeMenu");
                     }
-                    ViewBag.Message = Properties.Settings.Default.p013_error_Auth;
+                    ViewBag.ErrorMessage = Properties.Settings.Default.p013_error_Auth;
                     return View(model);
                 }
-                ViewBag.Message = Properties.Settings.Default.p013_error_Recuired;
+                ViewBag.ErrorMessage = Properties.Settings.Default.p013_error_Recuired;
                 return View(model);
             }
             return RedirectToAction(actionName: "EmployeeMenu");
@@ -153,7 +161,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session != null)
             {
-                Session.Remove("loginusername");
+                Session.Remove("loginUserName");
             }
             FormsAuthentication.SignOut();
             return Redirect("EmployeeLogin");

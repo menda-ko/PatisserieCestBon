@@ -9,15 +9,23 @@ using System.Web.Mvc;
 
 namespace PatisserieCestBon.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
         // ★商品一覧表示（バックオフィス）ここから★
         public ActionResult List()
         {
-            /* 商品テーブルから、削除フラグがFalseのもののみ取得
-             * このメソッドはAdd～Deleteの正常終了時や一部のエラー時にも呼び出される */
-            var itemList = db.Items
+            // セッション確認。ログイン時にセットされたキーが残っていれば処理続行
+            //string sessionId = (string);
+            // キーがnullの場合、ログインページに飛ばす？
+            if (Session["loginUserName"] == null)
+            {
+                RedirectToAction("EmployeeLogin", "Login");
+            }
+                /* 商品テーブルから、削除フラグがFalseのもののみ取得
+                 * このメソッドはAdd～Deleteの正常終了時や一部のエラー時にも呼び出される */
+                var itemList = db.Items
                 .Where(i => i.deleteFlag.Equals(false));
             ViewBag.ItemList = itemList;
             return View("List");
