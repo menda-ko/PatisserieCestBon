@@ -239,7 +239,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\EmployeeError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\CustomerMenu.cshtml" />
     <Content Include="Views\Login\EmployeeMenu.cshtml" />
@@ -255,6 +255,7 @@
     <Content Include="Views\Item\Update1.cshtml" />
     <Content Include="Views\Item\Update2.cshtml" />
     <Content Include="Views\Item\Delete1.cshtml" />
+    <Content Include="Views\Shared\CustomerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
