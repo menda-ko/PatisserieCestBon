@@ -169,7 +169,7 @@
           </Key>
           <Property Name="itemNo" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
           <Property Name="itemName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="stock1" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="stock" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
           <Property Name="receiptDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Item" Relationship="Self.FK__Stock__itemNo__2F10007B" FromRole="Stock" ToRole="Item" />
         </EntityType>
@@ -278,7 +278,7 @@
               <MappingFragment StoreEntitySet="Stock">
                 <ScalarProperty Name="itemNo" ColumnName="itemNo" />
                 <ScalarProperty Name="itemName" ColumnName="itemName" />
-                <ScalarProperty Name="stock1" ColumnName="stock" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
                 <ScalarProperty Name="receiptDate" ColumnName="receiptDate" />
               </MappingFragment>
             </EntityTypeMapping>

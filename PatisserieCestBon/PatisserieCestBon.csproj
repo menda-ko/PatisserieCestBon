@@ -188,7 +188,7 @@
     <Content Include="Content\images\cheesecake.png" />
     <Content Include="Content\images\creampuff.png" />
     <Content Include="Content\images\montblanc.png" />
-    <Content Include="Content\images\petisserie_cest_bon_logo.png" />
+    <Content Include="Content\images\patisserie_cest_bon_logo.png" />
     <Content Include="Content\images\pie_apple.png" />
     <Content Include="Content\images\shortcake.png" />
     <Content Include="Content\images\tarte_cheese.png" />
@@ -239,7 +239,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\EmployeeError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\CustomerMenu.cshtml" />
     <Content Include="Views\Login\EmployeeMenu.cshtml" />
@@ -249,12 +249,18 @@
     <Content Include="Views\Shared\_BeforeAuthCustomer.cshtml" />
     <Content Include="Views\Login\EmployeeLogin.cshtml" />
     <Content Include="Views\Shared\_BeforeAuthEmployee.cshtml" />
+    <Content Include="Views\Item\List.cshtml" />
+    <Content Include="Views\Item\Add1.cshtml" />
+    <Content Include="Views\Item\Add2.cshtml" />
+    <Content Include="Views\Item\Update1.cshtml" />
+    <Content Include="Views\Item\Update2.cshtml" />
+    <Content Include="Views\Item\Delete1.cshtml" />
+    <Content Include="Views\Shared\CustomerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Customer\" />
     <Folder Include="Views\Employee\" />
-    <Folder Include="Views\Item\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>

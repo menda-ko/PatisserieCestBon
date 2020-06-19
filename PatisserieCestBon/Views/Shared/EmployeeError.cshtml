@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_BeforeAuthEmployee.cshtml";
+    ViewBag.title = "システムエラー";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <br>
+    <p class="text-danger"><b>システムエラーが発生しました</b></p>
+    <p style="padding:10px">
+        システムエラーが発生しました。<br>
+        現在の操作を中断して、再度ログインして処理を行ってください。<br>
+        状況が改善されない場合は、大変お手数ですが、弊社情報システム部までお問い合わせください。<br>
+    </p>
+    <input type="submit" onclick="location.href='/Login/EmployeeLogin'" value="ログイン">
+    <br><br>
+</body>
+</html>

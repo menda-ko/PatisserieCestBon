@@ -16,7 +16,7 @@ namespace PatisserieCestBon.Models
     {
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
-        public decimal stock1 { get; set; }
+        public decimal stock { get; set; }
         public Nullable<System.DateTime> receiptDate { get; set; }
     
         public virtual Item Item { get; set; }

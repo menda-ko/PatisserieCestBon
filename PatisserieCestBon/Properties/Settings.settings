@@ -404,5 +404,12 @@
     <Setting Name="p009_error_CartReCheckDelete" Type="System.String" Scope="Application">
       <Value Profile="(Default)">商品を削除する場合は、再見積を実行してから注文ボタンを押してください。</Value>
     </Setting>
+    <Setting Name="p032_error_FormatPhotoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品画像（URL）はURLの形式で入力してください。
+</Value>
+    </Setting>
+    <Setting Name="p034_error_FormatPhotoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">商品画像（URL）はURLの形式で入力してください。</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
