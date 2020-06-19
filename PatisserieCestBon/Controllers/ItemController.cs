@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace PatisserieCestBon.Controllers
 {
-    [Authorize]
     public class ItemController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
@@ -17,11 +16,10 @@ namespace PatisserieCestBon.Controllers
         public ActionResult List()
         {
             // セッション確認。ログイン時にセットされたキーが残っていれば処理続行
-            //string sessionId = (string);
-            // キーがnullの場合、ログインページに飛ばす？
+            // キーがnullの場合、システムエラーページに飛ばす
             if (Session["loginUserName"] == null)
             {
-                RedirectToAction("EmployeeLogin", "Login");
+                return View("EmployeeError");
             }
                 /* 商品テーブルから、削除フラグがFalseのもののみ取得
                  * このメソッドはAdd～Deleteの正常終了時や一部のエラー時にも呼び出される */
@@ -36,12 +34,22 @@ namespace PatisserieCestBon.Controllers
         // Add1 … 商品追加入力画面へ
         public ActionResult Add1()
         {
+            // セッション確認。ログイン時にセットされたキーが残っていれば処理続行
+            // キーがnullの場合、システムエラーページに飛ばす
+            if (Session["loginUserName"] == null)
+            {
+                return View("EmployeeError");
+            }
             return View("Add1");
         }
         // Add2 … 商品追加確認画面へ
         public ActionResult Add2(string itemNo, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
             // 入力内容チェック
@@ -122,6 +130,10 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Add3(string itemNo, string itemName, string size, string photoUrl, int unitPrice,
             string assortment, string category)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // 商品番号をintに変換（のちの重複チェック・DB登録の際に使用）
             int.TryParse(itemNo, out int itemNoInt);
             // エラーメッセージを格納するリストを作成
@@ -170,6 +182,10 @@ namespace PatisserieCestBon.Controllers
         // Update1 … 更新入力画面へ
         public ActionResult Update1(int id)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // 更新対象の商品情報をDBから取得して入力画面に渡す
             ViewBag.Item = db.Items.Find(id);
             return View("Update1");
@@ -178,6 +194,10 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Update2(int id, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
             // 入力内容チェック
@@ -246,6 +266,10 @@ namespace PatisserieCestBon.Controllers
         public ActionResult Update3(int id, string itemName, string size, string photoUrl, string unitPrice,
             string assortment, string category)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // エラーメッセージを格納するリストを作成
             List<string> errorMessageList = new List<string>();
             var item = db.Items.Find(id);
@@ -260,7 +284,7 @@ namespace PatisserieCestBon.Controllers
             {
                 // 削除フラグがFalseだった場合、商品名の重複チェック
                 var itemNameDupulicate = db.Items
-                    .Where(i => i.itemName.Equals(itemName));
+                    .Where(i => i.itemName.Equals(itemName) && i.itemNo != id);
                 // 商品名が重複していた場合は入力画面に戻ってエラーメッセージ表示
                 if (itemNameDupulicate.Count() > 0)
                 {
@@ -292,6 +316,10 @@ namespace PatisserieCestBon.Controllers
         // Delete1 … 削除確認画面へ
         public ActionResult Delete1(int[] itemNoList)
         {
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
             // チェックボックスに1つもチェックが入っていない場合
             if (itemNoList == null)
             {
@@ -333,7 +361,11 @@ namespace PatisserieCestBon.Controllers
         // Delete2 … 商品の削除（商品テーブルの削除フラグをTrueに更新）
         public ActionResult Delete2(int[] itemNoList)
         {
-                foreach (var itemNo in itemNoList)
+            if (Session["loginUserName"] == null)
+            {
+                return Redirect("EmployeeError");
+            }
+            foreach (var itemNo in itemNoList)
             {
                 var item = db.Items.Find(itemNo);
                 if(item.deleteFlag == true)
