@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>顧客更新確認画面</title>
+</head>
+<body>
+    <div align="center">
+        <h1>顧客情報メンテナンス</h1>
+        <p>
+            以下の内容で顧客情報を更新します。<br />
+            更新内容を確認の上、「更新」ボタンを押してください。
+        </p>
+
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <th>@ViewBag.customerId</th>
+            </tr>
+            <tr><th colspan="2">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;会社情報</th></tr>
+            <tr>
+                <th>会社名</th>
+                <th>@ViewBag.companyName</th>
+            </tr>
+            <tr>
+                <th>住所</th>
+                <th>@ViewBag.address</th>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <th>@ViewBag.telNo</th>
+            </tr>
+            <tr><th colspan="2">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ご担当者様情報</th></tr>
+            <tr>
+                <th>氏名(漢字)</th>
+                <th>@ViewBag.customerName</th>
+            </tr>
+            <tr>
+                <th>氏名(かな)</th>
+                <th>@ViewBag.customerKana</th>
+            </tr>
+            <tr>
+                <th>部署</th>
+                <th>@ViewBag.dept</th>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <th>@ViewBag.email</th>
+            </tr>
+        </table>
+
+        <form action="/Customer/Update3" method="post">
+            <input type="hidden" name="customerId" value="@ViewBag.customerId">
+            <input type="hidden" name="companyName" value="@ViewBag.companyName">
+            <input type="hidden" name="address" value="@ViewBag.address">
+            <input type="hidden" name="telNo" value="@ViewBag.telNo">
+            <input type="hidden" name="customerName" value="@ViewBag.customerName">
+            <input type="hidden" name="customerKana" value="@ViewBag.customerKana">
+            <input type="hidden" name="dept" value="@ViewBag.dept">
+            <input type="hidden" name="email" value="@ViewBag.email">
+            <input type="hidden" name="password" value="@ViewBag.password"><br />
+            <input type="submit" value="登録"/>
+            <input type="button" onclick="history.back()" value="戻る" />
+        </form>
+    </div>
+</body>
+</html>

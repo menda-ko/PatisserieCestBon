@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>顧客一覧表示</title>
+</head>
+<body>
+    <div align="center">
+        <h1>顧客情報メンテナンス</h1>
+        <p>
+            顧客情報のメンテナンスを行います。<br />
+            登録済みの顧客情報を変更するには、会社名のリンクをクリックしてください。<br />
+            顧客情報を削除する場合は、リストの右にある「削除」をチェックし、「削除」ボタンを押してください。
+        </p>
+        @if (ViewBag.updateCheck == 1)
+        {
+            <p>@ViewBag.updateSuccess </p>
+        }
+        @if (ViewBag.deleteCheck == 1)
+        {
+            <p>@ViewBag.deleteSuccess </p>
+        }
+        @if (ViewBag.alreadyDelete == 1)
+        {
+            <p>@ViewBag.alreadyDeleteMes </p>
+        }
+
+
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <th>会社名</th>
+
+                <th>顧客担当者部署</th>
+                <th>顧客担当者名</th>
+                <th>削除</th>
+            </tr>
+            @foreach (var list in ViewBag.List)
+            {
+                <tr>
+                    <th>@list.customerId.ToString("000000")</th>
+                    <form method="post" action="~/Customer/Update1">
+                        <input type="hidden" name="customerId" value="@list.customerId" />
+                        <th><input type="submit" value="@list.companyName" style="border:none;background-color:transparent;color:blue;text-decoration:underline;" /></th>
+                    </form>
+                    <th>@list.dept</th>
+                    <th>@list.customerName</th>
+                    <form method="post" action="~/Customer/Delete1">
+                        <input type="hidden" name="customerId" value="@list.customerId" />
+                        <th><input type="submit" value="削除" /></th>
+                    </form>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

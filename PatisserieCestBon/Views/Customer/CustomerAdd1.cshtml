@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_BeforeAuthCustomer.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script type="text/javascript" src="~/Scripts/common.js"></script>
+
+    <title>顧客登録画面</title>
+</head>
+<body>
+    <div align="center">
+
+        <p>
+            システムの利用登録を行います。<br />
+            下記の情報を入力して、送信ボタンを押してください
+        </p>
+
+        <form action="/Customer/CustomerAdd2" method="post">
+            <table border="0">
+                <tr>
+                    <th></th>
+                    <th>会社情報</th>
+                </tr>
+
+                @if (ViewBag.compNameCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RecuiredCompanyName</p>
+                }
+                <tr>
+                    <th>会社名</th>
+                    <th><input type="text" name="companyName" maxlength="255" size="30"></th>
+                </tr>
+
+                @if (ViewBag.addressCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RecuiredAddress</p>
+                }
+                <tr>
+                    <th>住所</th>
+                    <th><input type="text" name="address" maxlength="255" size="40"></th>
+                </tr>
+
+
+                @if (ViewBag.telNoCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RecuiredTelNo</p>
+                }
+                @if (ViewBag.formatTelNoCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.formatTelNo</p>
+                }
+                @if (ViewBag.typeTelCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.TypeTelNo</p>
+                }
+                <tr>
+                    <th>電話番号</th>
+                    <th><input type="text" name="telNo" maxlength="13" size="20"></th>
+
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>ご担当者情報</th>
+                </tr>
+
+                @if (ViewBag.customerNameCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RecuiredCustomerName</p>
+                }
+                <tr>
+                    <th>氏名(漢字)</th>
+                    <th><input type="text" name="customerName" maxlength="255" size="30"></th>
+
+                </tr>
+
+                @if (ViewBag.customerKanaCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RecuiredCustomerKana</p>
+                }
+                @if (ViewBag.formatKanaCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.TypeKana</p>
+                }
+                <tr>
+                    <th>氏名(かな)</th>
+                    <th><input type="text" name="customerKana" maxlength="255" size="30"></th>
+
+                </tr>
+                <tr>
+                    <th>部署</th>
+                    <th><input type="text" name="dept" maxlength="255" size="20"></th>
+
+
+                </tr>
+
+                @if (ViewBag.formatEmailCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.formatEmail</p>
+                }
+                @if (ViewBag.typeEmailCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.TypeEmail</p>
+                }
+                <tr>
+                    <th>メールアドレス</th>
+                    <th><input type="text" name="email" maxlength="255" size="40"></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th>認証用情報</th>
+                </tr>
+
+                @if (ViewBag.passwordCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RequiredPassword</p>
+                }
+
+                @if (ViewBag.matchPasswordCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.MatchRetypePassword</p>
+                }
+                <tr>
+                    <th>パスワード</th>
+                    <th><input type="password" name="password" maxlength="255" size="20"></th>
+                </tr>
+
+                @if (ViewBag.retypePasswordCheck == 1)
+                {
+                    <p class="text-danger">@ViewBag.RequiredRetypePassword</p>
+                }
+                <tr>
+                    <th>パスワード(確認)</th>
+                    <th><input type="password" name="checkPass" maxlength="255" size="20"></th>
+                </tr>
+            </table>
+            <input type="submit" value="送信" /> <input type="button" value="リセット" onClick="clearFormAll(); " />
+        </form>
+    </div>
+</body>
+</html>
