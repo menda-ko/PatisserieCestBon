@@ -220,6 +220,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -244,6 +245,10 @@
     <Content Include="Views\Customer\CustomerAdd1.cshtml" />
     <Content Include="Views\Customer\CustomerAdd2.cshtml" />
     <Content Include="Views\Customer\CustomerAdd3.cshtml" />
+    <Content Include="Views\Customer\List.cshtml" />
+    <Content Include="Views\Customer\Delete1.cshtml" />
+    <Content Include="Views\Customer\Update2.cshtml" />
+    <Content Include="Views\Customer\Update1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
