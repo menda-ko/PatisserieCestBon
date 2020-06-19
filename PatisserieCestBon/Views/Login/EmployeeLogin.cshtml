@@ -1,0 +1,45 @@
+﻿@model PatisserieCestBon.Models.Employee
+@{
+    Layout = "~/Views/Shared/_BeforeAuthEmployee.cshtml";
+    ViewBag.title = "ログイン";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <br>
+    社員番号とパスワードを入力してください。
+    <br>
+    @* ID・パスワードが空欄もしくは制約違反の場合
+        （＝ViewBagにエラーメッセージが格納されている場合）
+          エラーメッセージ表示 *@
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+    <br>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <form action="/Login/EmployeeLogin" method="post">
+            <table align="center">
+                <tr>
+                    <td style="text-align:left">社員番号</td>
+                    <td><input type="text" name="inputEmpNo"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">パスワード&nbsp;</td>
+                    <td><input type="password" name="inputPassword"></td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="ログイン">
+            <input type="reset" value="クリア"> @*フォーム内容を初期状態に戻す。完全にはクリアできない*@
+        </form>
+    }
+    <br>
+    <br>
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@model PatisserieCestBon.Models.Item
+
+@{
+    ViewBag.Title = "商品更新確認";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h3>商品情報メンテナンス</h3>
+
+<p style="padding:10px">
+    以下の内容で商品情報を更新します。<br>
+    更新内容を確認の上、「更新」ボタンを押してください。<br>
+</p>
+
+@*エラーメッセージがある場合は表示*@
+@if (ViewBag.LengthOfErrorMessageList > 0)
+{
+    foreach (var errorMessage in ViewBag.ErrorMessageList)
+    {
+        <div class="text-danger">@errorMessage</div>
+    }
+}
+<br>
+
+<form>
+    <table border="1" align="center" width="400px">
+        <tr>
+            <th style="text-align:center">
+                商品番号
+            </th>
+            <td style="text-align:left">
+                @ViewBag.itemNo.ToString("0000")
+                <input type="hidden" name="id" value="@ViewBag.itemNo">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                商品名
+            </th>
+            <td style="text-align:left">
+                @ViewBag.itemName
+                <input type="hidden" name="itemName" value="@ViewBag.itemName">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                商品画像
+            </th>
+            <td style="text-align:center">
+                <img src="@ViewBag.photoUrl" alt="商品画像" />
+                <input type="hidden" name="photoUrl" value="@ViewBag.photoUrl">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                単価
+            </th>
+            <td style="text-align:left">
+                &yen;@String.Format("{0:#,0}-", @ViewBag.unitPrice)
+                <input type="hidden" name="unitPrice" value="@ViewBag.unitPrice">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                寸法
+            </th>
+            <td style="text-align:left">
+                @ViewBag.size@("cm")
+                <input type="hidden" name="size" value="@ViewBag.size">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                種別
+            </th>
+            <td style="text-align:left">
+                @ViewBag.assortment
+                <input type="hidden" name="assortment" value="@ViewBag.assortment">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                カテゴリー
+            </th>
+            <td style="text-align:left">
+                @ViewBag.category
+                <input type="hidden" name="category" value="@ViewBag.category">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" formaction="/Item/Update3" formmethod="post" value="登録">
+    @* ↓onclick="history.back()"で、入力値を保持したまま入力画面に戻れる *@
+    <input type="submit" formaction="/Item/Update1" formmethod="post" value="戻る">
+</form>
+<br>
