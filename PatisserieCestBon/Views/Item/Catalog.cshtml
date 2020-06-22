@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "カタログ閲覧";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<h2>取扱商品カタログ</h2>
+
+<h3>シュー</h3>
+@if (ViewBag.CreamPuffList != null)
+{
+    foreach (var item in ViewBag.CreamPuffList)
+    {
+        <table border="1">
+            <tr>
+                <td style="text-align:center">
+                    <img src="@item.photoUrl" alt="@item.itemName" />
+                </td>
+                <td style="text-align:left">
+                    商品番号：@item.itemNo.ToString("0000")<br><br>
+                    @item.category<br><br>
+                    ご提供価格：&yen;@String.Format("{0:#,0}-", @item.unitPrice)<br><br>
+                    寸法：@item.size@("cm")<br>
+                    種別：@item.assortment<br>
+                    在庫数量：
+                    @if (ViewBag.OrderList != null)
+                    {
+                        foreach (var order in ViewBag.OrderList)
+                        {
+                            if (order.itemNo == item.itemNo)
+                            {
+                                item.stock -= order.quantity;
+                            }
+                        }
+                    }
+                    @if (item.stock > 0)
+                    {
+                        @item.stock<br><br>
+                        <input type="submit" formaction="/Item/Input" name="@item.itemNo" formmethod="post">
+                    }
+                    else
+                    {
+                        @("入荷待ち")
+                    }
+                    <br><br>
+                </td>
+            </tr>
+        </table>
+    }
+}

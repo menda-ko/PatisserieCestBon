@@ -264,6 +264,7 @@
     <Content Include="Views\Item\Update2.cshtml" />
     <Content Include="Views\Item\Delete1.cshtml" />
     <Content Include="Views\Shared\CustomerError.cshtml" />
+    <Content Include="Views\Item\Catalog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
