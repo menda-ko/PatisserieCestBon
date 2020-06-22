@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeUpdate1";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>担当者更新入力画面</title>
+</head>
+<body>
+    <form method="post">
+        <h2>担当者情報メンテナンス</h2>
+        <br>
+        担当者情報を更新します。<br>
+        更新内容を入力して、「送信」ボタンを押してください。<br>
+        <p class="text-danger">@ViewBag.ErrorMatchRetypePassword</p>
+        <p class="text-danger">@ViewBag.ErrorRecuiredEmpName</p>
+        <p class="text-danger">@ViewBag.ErrorRecuiredPassword</p>
+        <p class="text-danger">@ViewBag.ErrorRecuiredRetypePassword</p>
+        <p class="text-danger">@ViewBag.ErrorCharTypePassword</p>
+        <br>
+        <table border="1">
+            <tr>
+                <td>社員番号</td>
+                <td><input type="hidden" name="empno" value="@ViewBag.EmpNo">@ViewBag.EmpNo</td>
+            </tr>
+            <tr>
+                <td>担当者氏名</td>
+                <td><input type="text" name="empname" value="@ViewBag.EmpName"></td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td><input type="password" name="password1" value="@ViewBag.Password"></td>
+            </tr>
+            <tr>
+                <td>パスワード(確認)</td>
+                <td><input type="password" name="password2" value="@ViewBag.Password"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="送信" formaction = "/Employee/Update2">
+        <input type="submit" value="戻る" formaction = "/Employee/List2">
+    </form>
+</body>
+</html>
+

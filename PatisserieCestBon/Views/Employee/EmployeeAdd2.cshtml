@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeAdd2";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>担当者追加確認画面</title>
+</head>
+<body>
+    <h2>担当者情報メンテナンス</h2>
+    <br>
+    <form method="post">
+        以下の内容で担当者情報を登録します。<br>
+        更新内容を確認の上、「登録」ボタンを押してください。<br><br>
+        <table border="1">
+            <tr>
+                <td>社員番号</td>
+                <td>
+                    <input type="hidden" name="empno" value="@ViewBag.EmpNo">
+                    @ViewBag.EmpNo
+                </td>
+            </tr>
+            <tr>
+                <td>担当者氏名</td>
+                <td>
+                    <input type="hidden" name="empname" value="@ViewBag.EmpName">
+                    @ViewBag.EmpName
+                </td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td>
+                    <input type="hidden" name="password" value="@ViewBag.Password">
+                    ****
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="登録" formaction ="/Employee/Add3">
+        <input type="submit" value="戻る" formaction ="/Employee/Add1">
+    </form>
+</body>
+</html>
+
