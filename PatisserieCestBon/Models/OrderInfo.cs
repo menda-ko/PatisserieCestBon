@@ -11,24 +11,17 @@ namespace PatisserieCestBon.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class OrderInfo
     {
-        [RegularExpression("[0-9]+", ErrorMessage = "注文番号は数字で入力してください")]
-        [MaxLength(6, ErrorMessage = "注文番号は6桁以内で入力してください。")]
         public decimal orderNo { get; set; }
         public decimal orderSeqNo { get; set; }
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
         public decimal quantity { get; set; }
-        [RegularExpression("\\d{4}/\\d{1,2}/\\d{1,2}", ErrorMessage = "納期（受注日時）のFrom・Toは「yyyy/mm/dd」の形式で入力してください。")]
         public System.DateTime deliveryDate { get; set; }
-        [RegularExpression("\\d{4}/\\d{1,2}/\\d{1,2}", ErrorMessage = "納期（受注日時）のFrom・Toは「yyyy/mm/dd」の形式で入力してください。")]
         public System.DateTime orderDate { get; set; }
         public string status { get; set; }
-        [RegularExpression("[0-9]+", ErrorMessage = "顧客IDは数字で入力してください")]
-        [MaxLength(6, ErrorMessage = "顧客IDは6桁以内で入力してください。")]
         public decimal customerId { get; set; }
     
         public virtual Item Item { get; set; }

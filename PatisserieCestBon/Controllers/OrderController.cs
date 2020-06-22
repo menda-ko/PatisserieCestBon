@@ -26,13 +26,15 @@ namespace PatisserieCestBon.Controllers
     public class OrderController : Controller
     {
         public ActionResult OrderSerch1()
-        if (Session["loginUserName"] == null)
+        {
+            if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             return View();
         }
+
         //cartListの型が分からない
         public ActionResult Add(int subTotal, int tax, int total)
         {
@@ -40,7 +42,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
 
             ViewBag.subTotal = subTotal;
@@ -54,7 +56,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             if (!ModelState.IsValid)
             {
@@ -93,7 +95,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             using (var db = new DatabaseEntities())
             {
@@ -107,7 +109,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             using (var db = new DatabaseEntities())
             {
@@ -118,17 +120,17 @@ namespace PatisserieCestBon.Controllers
                 {
                     if (order.status == "未出荷")
                     {
-                        u.stock1 = u.stock1 + order.quantity;
+                        u.stock = u.stock + order.quantity;
                         orderStatus.status = order.status;
                     }
                     else
                     {
-                        if (u.stock1 < order.quantity)
+                        if (u.stock < order.quantity)
                         {
                             ModelState.AddModelError(string.Empty, PatisserieCestBon.Properties.Settings.Default.p017_error_ShortageStock);
                             return View("OrderUpdate1", list);
                         }
-                        u.stock1 = u.stock1 - order.quantity;
+                        u.stock = u.stock - order.quantity;
                         orderStatus.status = order.status;
                     }
                 }
@@ -142,7 +144,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
             using (var db = new DatabaseEntities())
             {
@@ -161,7 +163,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
             using (var db = new DatabaseEntities())
             {
@@ -192,7 +194,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
             using (var db = new DatabaseEntities())
             {

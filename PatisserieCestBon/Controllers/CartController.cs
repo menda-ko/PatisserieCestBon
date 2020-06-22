@@ -16,7 +16,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
             using (var db = new DatabaseEntities())
             {                

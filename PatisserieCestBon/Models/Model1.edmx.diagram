@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98d74edd26a349d594cbe928730d644c" Name="Diagram1">
-        <EntityTypeShape EntityType="DatabaseModel.Customer" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseModel.Employee" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="ec14e9ca53ce401ca2f13eb5bac068ba" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.CartInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Customer" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Employee" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseModel.Item" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseModel.OrderInfo" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseModel.Stock" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="DatabaseModel.FK__Stock__itemNo__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Stock__itemNo__300424B4" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseModel.fk_Item_itemNo" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

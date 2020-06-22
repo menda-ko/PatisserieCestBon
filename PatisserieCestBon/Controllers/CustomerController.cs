@@ -192,7 +192,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             using (var db = new DatabaseEntities())
@@ -214,7 +214,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             using (var db = new DatabaseEntities())
@@ -241,7 +241,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             ViewBag.customerId = customerId.ToString("000000");
@@ -398,7 +398,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             using (var db = new DatabaseEntities())
@@ -430,7 +430,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             using (var db = new DatabaseEntities())
@@ -448,7 +448,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
 
             using (var db = new DatabaseEntities())
