@@ -277,6 +277,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\EmployeeError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Stock\StockList.cshtml" />
+    <Content Include="Views\Stock\StockUpdate1.cshtml" />
+    <Content Include="Views\Order\StatusCheck.cshtml" />
+    <Content Include="Views\Order\OrderCancel1.cshtml" />
+    <Content Include="Views\Order\OrderSerch1.cshtml" />
+    <Content Include="Views\Order\OrderSerch2.cshtml" />
+    <Content Include="Views\Order\OrderUpdate1.cshtml" />
+    <Content Include="Views\Order\OrderUpdate2.cshtml" />
     <Content Include="Views\Customer\CustomerAdd1.cshtml" />
     <Content Include="Views\Customer\CustomerAdd2.cshtml" />
     <Content Include="Views\Customer\CustomerAdd3.cshtml" />
@@ -304,6 +312,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Employee\" />
+    <Folder Include="Views\Item\" />
+    <Folder Include="Views\Login\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +358,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap-theme_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

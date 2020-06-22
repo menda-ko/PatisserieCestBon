@@ -1,0 +1,48 @@
+﻿@model IEnumerable<IGrouping<Decimal, PatisserieCestBon.Models.OrderInfo>>
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderCancel1</title>
+</head>
+<body>
+    <h2>ご注文のお取消し確認</h2>
+    <a>以下のご注文のキャンセルを承ります。</a>
+    <a>内容をご確認の上、よろしければ「キャンセル」ボタンを押してください。</a><br />
+    @using (Html.BeginForm("OrderCancel2", "Order", FormMethod.Post))
+    {
+        foreach (var group in Model)
+        {
+            @Html.HiddenFor(model => group.Key)
+            <a>ご注文番号:@group.Key.ToString("000000")</a>
+            <table border="1">
+                <tr>
+                    <th>商品番号</th>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>希望納期</th>
+                    <th>ステータス</th>
+                </tr>
+
+                @foreach (var order in group)
+                {
+                    @Html.HiddenFor(model => order.customerId)
+                    <tr>
+                        <td>@order.itemNo.ToString("0000")</td>
+                        <td>@order.itemName</td>
+                        <td>@order.quantity</td>
+                        <td>@order.deliveryDate</td>
+                        <td>@order.status</td>
+                    </tr>
+                }
+            </table>
+            <input name="cancel" type="submit" value="キャンセル" /><input name="back" type="submit" value="戻る" />
+        }
+    }
+</body>
+</html>
