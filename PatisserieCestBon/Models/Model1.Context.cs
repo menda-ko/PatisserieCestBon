@@ -25,6 +25,7 @@ namespace PatisserieCestBon.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CartInfo> CartInfoes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Item> Items { get; set; }

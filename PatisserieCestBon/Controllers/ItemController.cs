@@ -48,7 +48,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
@@ -132,7 +132,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // 商品番号をintに変換（のちの重複チェック・DB登録の際に使用）
             int.TryParse(itemNo, out int itemNoInt);
@@ -184,7 +184,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // 更新対象の商品情報をDBから取得して入力画面に渡す
             ViewBag.Item = db.Items.Find(id);
@@ -196,7 +196,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // エラーメッセージ格納リスト作成
             List<string> errorMessageList = new List<string>();
@@ -268,7 +268,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // エラーメッセージを格納するリストを作成
             List<string> errorMessageList = new List<string>();
@@ -318,7 +318,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             // チェックボックスに1つもチェックが入っていない場合
             if (itemNoList == null)
@@ -363,7 +363,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             foreach (var itemNo in itemNoList)
             {

@@ -23,7 +23,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @using (Html.BeginForm("StockUpdate2", "Stock", FormMethod.Post))
     {
-        @Html.ValidationMessageFor(model => Model.stock1, "", new { @class = "text-danger" })<br />
+        @Html.ValidationMessageFor(model => Model.stock, "", new { @class = "text-danger" })<br />
         @Html.ValidationMessageFor(model => Model.receiptDate, "", new { @class = "text-danger" })<br />
         @Html.HiddenFor(model => Model.itemNo)
         <table border="1">
@@ -42,7 +42,7 @@
             <tr>
                 <th>数量</th>
                 <td>
-                    @ViewBag.stock.stock1
+                    @ViewBag.stock.stock
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
         <table>
             <tr>
                 <th>数量</th>
-                <td>@Html.TextBoxFor(model => Model.stock1, new { @Value = "" })@*<input name="quantity"type="text"/>*@</td>
+                <td>@Html.TextBoxFor(model => Model.stock, new { @Value = "" })@*<input name="quantity"type="text"/>*@</td>
                 <td><input name="receipt" type="submit" value="入荷" /><input name="decrease" type="submit" value="減少" /></td>
             </tr>
             <tr>

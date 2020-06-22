@@ -18,7 +18,7 @@ namespace PatisserieCestBon.Controllers
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("CustomerError");
+                return RedirectToAction("CustomerError", "Login");
             }
             // 顧客メニュー画面を表示
             return View();
@@ -111,7 +111,7 @@ namespace PatisserieCestBon.Controllers
         {
             if (Session["loginUserName"] == null)
             {
-                return Redirect("EmployeeError");
+                return RedirectToAction("EmployeeError", "Login");
             }
             return View();
         }
