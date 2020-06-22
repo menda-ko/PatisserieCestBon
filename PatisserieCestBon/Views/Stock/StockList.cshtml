@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.Stock>
+
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<!DOCTYPE html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StockList</title>
+</head>
+<body>
+    <h2>在庫情報メンテナンス</h2>
+    <b>在庫情報のメンテナンスを行います。</b>
+    <b>変更したい在庫の商品名をクリックしてください。</b>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table border="1">
+        <tr>
+            <th>商品番号</th>
+            <th>商品名</th>
+            <th>数量</th>
+            <th>入荷予定日</th>
+        </tr>
+        @foreach (var stock in Model)
+        {
+            <tr>
+                @{
+                    decimal itemNo = stock.itemNo;
+                    <td>@itemNo.ToString("0000")</td>
+                }
+                <td>@Html.ActionLink(stock.itemName, "StockUpdate1", new { stock.itemNo })</td>
+                <td>@stock.stock1</td>
+                <td>@stock.receiptDate</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

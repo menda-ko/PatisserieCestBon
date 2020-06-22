@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.OrderInfo>
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderSerch2</title>
+</head>
+<body>
+    <h2>受注情報検索</h2>
+    <b>以下の条件で検索を行いました。</b><br />
+    <b>受注ステータスを変更する場合は、検索結果から</b><br />
+    <b>「ご注文番号-明細」リンクをクリックしてください。</b><br />
+    <table>
+            <tr>
+                <th>顧客ID</th>
+                <td>@ViewBag.order.customerId</td>
+            </tr>
+            <tr>
+                <th>ご注文番号</th>
+                <td>@ViewBag.order.orderNo</td>
+            </tr>
+            <tr>
+                <th>希望納期</th>
+                <td>@ViewBag.deliveryFrom～@ViewBag.deliveryTo</td>
+            </tr>
+            <tr>
+                <th>受注日時</th>
+                <td>@ViewBag.orderFrom～@ViewBag.orderTo</td>
+            </tr>
+            <tr>
+                <th>ステータス</th>
+                <td>@ViewBag.order.status</td>
+            </tr>
+        </table>
+  　<b>検索結果</b>
+        
+            
+   <table border="1">
+       <tr>
+           <th>ご注文番号-明細</th>
+           <th>商品番号</th>
+           <th>商品名</th>
+           <th>数量</th>
+           <th>希望納期</th>
+           <th>ステータス</th>
+       </tr>
+       @foreach (var orderInfo in Model)
+       {
+           decimal orderNo = orderInfo.orderNo;
+           decimal itemNo = orderInfo.itemNo;
+           decimal seqNo = orderInfo.orderSeqNo;
+           <tr>
+               <td>@Html.ActionLink(orderNo.ToString("000000") + "-" + seqNo.ToString("000"), "OrderUpdate1", new { orderInfo.orderNo, orderInfo.orderSeqNo })</td>
+               <td>@itemNo.ToString("0000")</td>
+               <td>@Html.DisplayFor(model => orderInfo.itemName)</td>
+               <td>@Html.DisplayFor(model => orderInfo.quantity)</td>
+               <td>@Html.DisplayFor(model => orderInfo.deliveryDate)</td>
+               <td>@Html.DisplayFor(model => orderInfo.status)</td>
+           </tr>
+       }
+       </table>
+        
+</body>
+</html>

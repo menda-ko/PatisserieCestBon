@@ -1,0 +1,73 @@
+﻿@model PatisserieCestBon.Models.Stock
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+    decimal itemNo = Model.itemNo;
+}
+<!DOCTYPE html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <title>StockUpdate1</title>
+</head>
+<body>
+    <h2>在庫情報メンテナンス</h2>
+    <p>在庫情報を更新します。</p>
+    <b>商品が入荷した場合は、入荷数量を入力して、「入荷」ボタンを押してください。</b><br />
+    <b>在庫を減らしたい場合は、減少数量を入力して、「減少」ボタンを押してください。</b><br />
+    <b>入荷予定日を更新したい場合は、入荷予定日を入力して、「更新」ボタンを押してください。</b><br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @using (Html.BeginForm("StockUpdate2", "Stock", FormMethod.Post))
+    {
+        @Html.ValidationMessageFor(model => Model.stock1, "", new { @class = "text-danger" })<br />
+        @Html.ValidationMessageFor(model => Model.receiptDate, "", new { @class = "text-danger" })<br />
+        @Html.HiddenFor(model => Model.itemNo)
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <td>
+                    @Model.itemNo.ToString("0000")
+                </td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td>
+                    @ViewBag.stock.itemName
+                </td>
+            </tr>
+            <tr>
+                <th>数量</th>
+                <td>
+                    @ViewBag.stock.stock1
+                </td>
+            </tr>
+            <tr>
+                <th>入社日</th>
+                <td>
+                    @ViewBag.stock.receiptDate
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>数量</th>
+                <td>@Html.TextBoxFor(model => Model.stock1, new { @Value = "" })@*<input name="quantity"type="text"/>*@</td>
+                <td><input name="receipt" type="submit" value="入荷" /><input name="decrease" type="submit" value="減少" /></td>
+            </tr>
+            <tr>
+                <th>入荷予定日</th>
+                <td>@Html.TextBoxFor(model => Model.receiptDate, new { @Value = "", @Id = "receiptDate" })</td>
+                <td><input name="update" type="submit" value="更新" /></td>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            $('#receiptDate').datepicker();
+        </script>
+    }
+
+</body>
+</html>

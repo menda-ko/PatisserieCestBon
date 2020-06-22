@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeList";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>担当者一覧表示画面</title>
+</head>
+<body>
+    <p class="text-danger">@ViewBag.InfoAddSuccess</p>
+    <p class="text-danger">@ViewBag.InfoUpdateSuccess</p>
+    <p class="text-danger">@ViewBag.InfoDeleteSuccess</p>
+    <h2>担当者情報メンテナンス</h2>
+
+    <form>
+        <br>
+        担当者情報のメンテナンスを行います<br>
+        新規に担当者を追加する場合は、「新規追加」ボタンを押してください。<br>
+        登録済み担当者の情報を変更するには、社員氏名のリンクをクリックしてください。<br>
+        担当者を削除する場合は、リストの右にある「削除」をチェックし、「削除」ボタンを押してください。
+        <br>
+        <p class="text-danger">@ViewBag.ErrorNotChecked</p>
+        <p class="text-danger">@ViewBag.ErrorAlreadyDeletedEmployee</p>
+        <br>
+        <table border="1">
+            <tr><td>社員番号</td><td>担当者氏名</td><td>削除</td></tr>
+            @foreach (var num in ViewBag.E)
+            {
+                <tr>
+                    <td>@num.empNo</td>
+                    <td>
+                        <a href="/Employee/Update1?empno=@num.empNo&
+                           empname=@num.empName&password=@num.password">@num.empName</a>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="empno" value="@num.empNo">
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br>
+        <input type="submit" value="新規追加" formaction="/Employee/Add1">
+        <input type="submit" value="削除" formaction="/Employee/Delete1" >
+    </form>
+
+
+</body>
+</html>
+
+

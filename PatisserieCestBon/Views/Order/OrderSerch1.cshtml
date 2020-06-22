@@ -1,0 +1,64 @@
+﻿@model PatisserieCestBon.Models.OrderInfo
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+    var selectItems = new SelectListItem[]
+    {
+        new SelectListItem{Value = "すべて",Text="すべて"}
+        ,new SelectListItem{Value = "未出荷",Text="未出荷"}
+        ,new SelectListItem{Value = "出荷済", Text="出荷済"}
+        ,new SelectListItem{Value = "キャンセル", Text="キャンセル"}
+                    };
+
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <title>OrderSerch1</title>
+</head>
+<body>
+    <h2>受注情報検索</h2>
+    <b>受注情報を検索します。</b><br />
+    <b>検索条件を入力して、「検索」ボタンを押してください。</b><br />
+    @using (Html.BeginForm("OrderSerch2", "Order", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <th>顧客ID</th>
+                <td>@Html.TextBoxFor(model => Model.customerId)</td>
+            </tr>
+            <tr>
+                <th>ご注文番号</th>
+                <td>@Html.TextBoxFor(model => Model.orderNo)</td>
+            </tr>
+            <tr>
+                <th>希望納期</th>
+                <td>@Html.TextBoxFor(model => Model.deliveryDate, new { @Name = "deliveryFrom", @Id = "receiptDate1" })@*<input type="text" name="deliveryFrom" id="receiptDate1" />*@～@Html.TextBoxFor(model => Model.deliveryDate, new { @Name = "deliveryTo", @Id = "receiptDate2" })@*<input type="text" name="deliveryTo" id="receiptDate2" />*@</td>
+            </tr>
+            <tr>
+                <th>受注日時</th>
+                <td>
+                    @Html.TextBoxFor(model => Model.orderDate, new { @Name = "orderFrom", @Id = "receiptDate3" })@*<input type="text" name="orderFrom" id="receiptDate3" />*@～@Html.TextBoxFor(model => Model.orderDate, new { @Name = "orderTo", @Id = "receiptDate4" })@*<input type="text" name="orderTo" id="receiptDate4" />*@
+                </td>
+            </tr>
+            <tr>
+                <th>ステータス</th>
+                <td>@Html.DropDownListFor(model => Model.status, new SelectList(selectItems, "Value", "Text"))</td>
+            </tr>
+        </table>
+        <input type="submit" value="検索" />
+        <script type="text/javascript">
+            $('#receiptDate1').datepicker();
+            $('#receiptDate2').datepicker();
+            $('#receiptDate3').datepicker();
+            $('#receiptDate4').datepicker();
+        </script>
+    }
+</body>
+</html>
