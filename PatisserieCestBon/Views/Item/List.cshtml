@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.Item>
+
+@{
+    ViewBag.Title = "商品一覧";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h3>商品情報メンテナンス</h3>
+
+<p style="padding:10px">
+    商品情報のメンテナンスを行います。<br>
+    新規に取扱商品を追加する場合は、「商品追加」ボタンを押してください。<br>
+    登録済み商品の情報を変更するには、商品名のリンクをクリックしてください。<br>
+    商品を削除する場合は、リストの右にある「削除」をチェックし、「削除」ボタンを押してください。<br>
+</p>
+
+@*インフォメッセージがある場合は表示*@
+    @if (!string.IsNullOrWhiteSpace(ViewBag.InfoMessage))
+    {
+        <p class="text-info">@ViewBag.InfoMessage</p>
+    }
+@*エラーメッセージがある場合は表示*@
+@if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+{
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+
+<form>
+    <table border="1" align="center">
+        <tr>
+            <th style="text-align:center">
+                商品番号
+            </th>
+            <th style="text-align:center">
+                商品名
+            </th>
+            <th style="text-align:center">
+                単価
+            </th>
+            <th style="text-align:center">
+                寸法
+            </th>
+            <th style="text-align:center">
+                種別
+            </th>
+            <th style="text-align:center">
+                カテゴリー
+            </th>
+            <th style="text-align:center">
+                削除
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.ItemList)
+        {
+            <tr>
+                <td style="text-align:left">
+                    @item.itemNo.ToString("0000") @* 商品番号0埋めして表示 *@
+                </td>
+                <td style="text-align:left">
+                    <a href="/Item/Update1/@item.itemNo">@item.itemName</a>
+                    @*↑商品の更新画面に飛ぶ商品名リンク*@
+                </td>
+                <td style="text-align:left">
+                    &yen;@String.Format("{0:#,0}-", @item.unitPrice) @* 単価「\0,000-」の形で表示 *@
+                </td>
+                <td style="text-align:left">
+                    @item.size@("cm")
+                </td>
+                <td style="text-align:left">
+                    @item.assortment
+                </td>
+                <td style="text-align:left">
+                    @item.category
+                </td>
+                <td style="text-align:center">
+                    <input type="checkbox" name="itemNoList[]" value="@item.itemNo">
+                    @* name="itemNoList[]"にすることで、複数のitemNoを配列で渡すことができる *@
+                </td>
+            </tr>
+        }
+    </table>
+    <br>
+    <input type="submit" value="商品追加" formaction="/Item/Add1" formmethod="post">
+    <input type="submit" value="削除" formaction="/Item/Delete1" formmethod="post">
+</form>
+<br>

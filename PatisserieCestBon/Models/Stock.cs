@@ -18,7 +18,7 @@ namespace PatisserieCestBon.Models
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
         [RegularExpression("[0-9]+", ErrorMessage = "数量は数字で入力してください")]
-        public decimal stock1 { get; set; }
+        public decimal stock { get; set; }
         [RegularExpression("\\d{4}/\\d{1,2}/\\d{1,2}", ErrorMessage = "入荷予定日はyyyy-mm-ddの形式で入力してください")]
         public Nullable<System.DateTime> receiptDate { get; set; }
     

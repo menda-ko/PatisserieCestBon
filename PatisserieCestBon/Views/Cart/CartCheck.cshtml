@@ -1,0 +1,71 @@
+﻿@model PatisserieCestBon.Models.CartInfo
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <title>見積確認画面</title>
+</head>
+<body>
+    <div align="center">
+        <h2>見積確認</h2>
+        <form action="/Order/Add" method="post">
+
+            <p>
+                買い物かごの中身からお見積内容を表示します。<br>
+                見積内容に間違いなければ、「注文」ボタンを押してください。<br>
+                数量、希望納期を変更するには、値を入力して、「再見積」ボタンを押してください。<br>
+                商品を削除する場合は、リストの右にある「削除」をチェックし、「再見積」ボタンを押してください。
+            </p>
+
+            <table border="1">
+                <tr>
+                    <td>商品番号</td>
+                    <td>商品名</td>
+                    <td>単価</td>
+                    <td>数量</td>
+                    <td>希望納期</td>
+                    <td>金額</td>
+                    <td>削除</td>
+                </tr>
+                @foreach (var cart in @ViewBag.cartList)
+                {
+                    <tr>
+                        <td>@cart.itemNo </td>
+                        <td>@cart.itemName</td>
+                        <td>@cart.unitPrice</td>
+                        <td><input type="text" value="@cart.quantity" size="3" /></td>
+                        <td><input type="text" id="receiptDate" value="@cart.deliveryDate" /></td>
+                        <td>@(cart.quantity * cart.unitPrice)</td>
+                        <td><input type="checkbox" name="delete" /></td>
+                    </tr>
+                }
+
+                <tr><td rowspan="3"></td><td colspan="4">小計</td><td>&yen;@ViewBag.subTotal</td></tr>
+                <tr><td colspan="4">消費税</td><td>&yen;@ViewBag.tax</td></tr>
+                <tr><td colspan="4">合計</td><td>&yen;@ViewBag.total</td></tr>
+            </table>
+            <input type="hidden" name="cartInfo" value="@ViewBag.cartList" />
+            <input type="hidden" name="subtotal" value="@ViewBag.subtotal" />
+            <input type="hidden" name="tax" value="@ViewBag.tax" />
+            <input type="hidden" name="total" value="@ViewBag.total" />
+            <input type="submit" value="注文" />
+            <input type="submit" value="再見積" formaction="/Cart/CartCheck" />
+        </form>
+    </div>
+    <script type="text/javascript">
+        $('#receiptDate').datepicker();
+    </script>
+</body>
+</html>
+
+

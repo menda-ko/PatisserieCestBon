@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_BeforeAuthCustomer.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>顧客登録完了画面</title>
+
+</head>
+<body>
+    <div align="center">
+        <p>
+            システムの利用登録を完了しました。<br />
+            お客様の顧客IDは、@ViewBag.customerId です。<br /><br />
+            ログイン時には、顧客IDとパスワードが必要となりますので、<br />
+            顧客IDを忘れないようにご注意ください。
+        </p><br /><br />
+        <input type="button" onclick="location.href='https://localhost:44381/Login/CustomerLogin'" value="ログイン画面を表示">
+    </div>
+</body>
+</html>

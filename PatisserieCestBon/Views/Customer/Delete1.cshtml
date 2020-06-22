@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>顧客削除確認</title>
+</head>
+<body>
+    <div align="center">
+        <h1>顧客情報メンテナンス</h1>
+        <p>
+            下記の顧客情報を削除します。<br />
+            内容を確認の上、「削除」ボタンを押してください。
+        </p>
+
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <th>会社名</th>
+
+                <th>顧客担当者部署</th>
+                <th>顧客担当者名</th>
+            </tr>
+
+            <tr>
+                <th>@ViewBag.model.customerId.ToString("000000")</th>
+                <th>@ViewBag.model.companyName</th>
+                <th>@ViewBag.model.dept</th>
+                <th>@ViewBag.model.customerName</th>
+            </tr>
+        </table><br />
+        <form action="~/Customer/Delete2" method="post" style="display:inline">
+            <input type="hidden" name="customerId" value="@ViewBag.model.customerId" />
+            <input type="submit" value="削除" />
+        </form>
+        <form action="~/Customer/List" method="post" style="display:inline">
+            <input type="submit" value="戻る" />
+        </form>
+    </div>
+</body>
+</html>

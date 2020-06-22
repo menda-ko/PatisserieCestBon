@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using PatisserieCestBon.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.SqlServer;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -22,15 +25,27 @@ namespace PatisserieCestBon.Controllers
     }
     public class OrderController : Controller
     {
-        // GET: Order
         public ActionResult OrderSerch1()
+        if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
+            return View();
+        }
+        //cartListの型が分からない
+        public ActionResult Add(int subTotal, int tax, int total)
         {
             // セッション確認
             if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
-                return Redirect("EmployeeError");
+                return Redirect("CustomerError");
             }
+
+            ViewBag.subTotal = subTotal;
+            ViewBag.tax = tax;
+            ViewBag.total = total;
             return View();
         }
         public ActionResult OrderSerch2(OrderInfo order, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo)

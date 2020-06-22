@@ -1,0 +1,98 @@
+﻿@model PatisserieCestBon.Models.Item
+
+@{
+    ViewBag.Title = "商品追加入力";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+}
+
+<h3>商品情報メンテナンス</h3>
+
+<p style="padding:10px">
+    商品情報を新規登録します。<br>
+    登録内容を入力して、「送信」ボタンを押してください。
+</p>
+
+@*エラーメッセージがある場合は表示*@
+@if (ViewBag.LengthOfErrorMessageList > 0)
+{
+    foreach (var errorMessage in ViewBag.ErrorMessageList)
+    {
+        <div class="text-danger">@errorMessage</div>
+    }
+}
+<br>
+<form>
+    <table border="1" align="center" width="400px">
+        <tr>
+            <th style="text-align:center">
+                商品番号
+            </th>
+            <td style="text-align:left">
+                <input type="text" name="itemNo">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                商品名
+            </th>
+            <td style="text-align:left">
+                <input type="text" name="itemName">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                商品画像（URL）
+            </th>
+            <td style="text-align:left">
+                <input type="text" name="photoUrl" style="width:100%">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                単価
+            </th>
+            <td style="text-align:left">
+                <input type="text" name="unitPrice">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                寸法
+            </th>
+            <td style="text-align:left">
+                <input type="text" name="size">
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                種別
+            </th>
+            <td style="text-align:left">
+                <select name="assortment">
+                    <option value="ピース">ピース</option>
+                    <option value="ホール">ホール</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align:center">
+                カテゴリー
+            </th>
+            <td style="text-align:left">
+                <select name="category">
+                    <option value="スポンジケーキ">スポンジケーキ</option>
+                    <option value="バターケーキ">バターケーキ</option>
+                    <option value="チーズケーキ">チーズケーキ</option>
+                    <option value="パイ">パイ</option>
+                    <option value="シュー">シュー</option>
+                    <option value="タルト">タルト</option>
+                    <option value="チョコレート">チョコレート</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" formaction="/Item/Add2" formmethod="post" value="送信">
+    <input type="submit" formaction="/Item/List" value="戻る">
+</form>
+<br>
