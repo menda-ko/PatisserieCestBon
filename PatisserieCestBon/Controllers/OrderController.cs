@@ -26,13 +26,15 @@ namespace PatisserieCestBon.Controllers
     public class OrderController : Controller
     {
         public ActionResult OrderSerch1()
-        if (Session["loginUserName"] == null)
+        {
+            if (Session["loginUserName"] == null)
             {
                 // セッションが空だったらシステムエラー
                 return Redirect("EmployeeError");
             }
             return View();
         }
+
         //cartListの型が分からない
         public ActionResult Add(int subTotal, int tax, int total)
         {
