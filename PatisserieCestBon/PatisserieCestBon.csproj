@@ -307,8 +307,15 @@
     <Content Include="Views\Item\Update2.cshtml" />
     <Content Include="Views\Item\Delete1.cshtml" />
     <Content Include="Views\Shared\CustomerError.cshtml" />
+    <Content Include="Views\Item\Catalog.cshtml" />
     <Content Include="Views\Cart\CartCheck.cshtml" />
     <Content Include="Views\Order\Add.cshtml" />
+    <Content Include="Views\Employee\List.cshtml" />
+    <Content Include="Views\Employee\Add1.cshtml" />
+    <Content Include="Views\Employee\Add2.cshtml" />
+    <Content Include="Views\Employee\Update1.cshtml" />
+    <Content Include="Views\Employee\Update2.cshtml" />
+    <Content Include="Views\Employee\Delete1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Employee\" />

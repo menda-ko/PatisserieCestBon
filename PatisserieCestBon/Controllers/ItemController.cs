@@ -384,5 +384,57 @@ namespace PatisserieCestBon.Controllers
             return List();
         }
         // ★商品削除（Delete1～Delete2）ここまで★
+        public ActionResult Catalog()
+        {
+            // セッション確認。ログイン時にセットされたキーが残っていれば処理続行
+            // キーがnullの場合、システムエラーページに飛ばす
+            if (Session["loginUserName"] == null)
+            {
+                return View("CustomerError");
+            }
+            // 未出荷の受注レコード全件取得
+            var orderList = db.OrderInfoes
+               // .Select(o => new { o.itemNo, o.quantity, o.status })
+                .Where(o => o.status == "未出荷")
+                .OrderBy(o => o.itemNo);
+            // 未出荷受注全件をビューに渡す
+            ViewBag.OrderList = orderList;
+            // 商品の在庫全件取得
+            var stockList = db.Stocks
+              //  .Select(s => new { s.itemNo, s.stock })
+                .OrderBy(s => s.itemNo);
+            // 削除フラグがFalseの商品全件取得
+            var itemList = db.Items
+                .Where(i => i.deleteFlag.Equals(false))
+                .OrderBy(i => i.itemNo);
+            // カテゴリーごとの商品情報取得
+            // ①シュー
+            var creampuffItemList = itemList
+                .Where(i => i.category == "シュー")
+                .OrderBy(i => i.itemNo);
+            // カテゴリが「シュー」の商品が1件以上あった場合、商品情報と在庫情報を商品番号で結合
+            if (creampuffItemList != null)
+            {
+                var creampuffStockList = creampuffItemList
+                    .Join(
+                    stockList, i => i.itemNo, s => s.itemNo, (i, s)
+                    => new
+                    {
+                        i.itemNo,
+                        i.itemName,
+                        i.photoUrl,
+                        i.unitPrice,
+                        i.size,
+                        i.assortment,
+                        i.category,
+                        s.stock
+                    }
+                    )
+                    .OrderBy(i => i.itemNo);
+                // カテゴリ「シュー」の商品・在庫情報リストをビューに渡す
+                ViewBag.CreamPuffList = creampuffStockList;
+            }
+            return View();
+        }
     }
 }
