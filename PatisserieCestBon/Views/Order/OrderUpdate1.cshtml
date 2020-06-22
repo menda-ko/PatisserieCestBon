@@ -1,0 +1,71 @@
+﻿@model IEnumerable<PatisserieCestBon.Models.OrderInfo>
+@{
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+    var selectItems = new SelectListItem[]
+{
+        new SelectListItem{Value = "未出荷",Text="未出荷"}
+        ,new SelectListItem{Value = "出荷済", Text="出荷済"}
+};
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderUpdate1</title>
+</head>
+<body>
+    <h2>受注ステータス変更</h2>
+    <a>受注ステータスを変更してください。</a><br />
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("OrderUpdate2", "Order", FormMethod.Post))
+    {
+        foreach (var order in Model)
+        {
+            decimal orderNo = order.orderNo;
+            decimal itemNo = order.itemNo;
+            decimal seqNo = order.orderSeqNo;
+            @Html.HiddenFor(model => order.orderNo)
+            @Html.HiddenFor(model => order.orderSeqNo)
+            @Html.HiddenFor(model => order.quantity)
+            @Html.HiddenFor(model => order.itemNo)
+            <table border="1">
+                <tr>
+                    <th>ご注文番号-明細</th>
+                    <td>@orderNo.ToString("000000")-@seqNo.ToString("000")</td>
+                </tr>
+                <tr>
+                    <th>商品番号</th>
+                    <td>@itemNo.ToString("0000")</td>
+                </tr>
+                <tr>
+                    <th>商品名</th>
+                    <td>@Html.DisplayFor(model => order.itemName)</td>
+                </tr>
+                <tr>
+                    <th>数量</th>
+                    <td>@Html.DisplayFor(model => order.quantity)</td>
+                </tr>
+                <tr>
+                    <th>希望納期</th>
+                    <td>@Html.DisplayFor(model => order.deliveryDate)</td>
+                </tr>
+                <tr>
+                    <th>ステータス</th>
+                    @if (order.status == "キャンセル")
+                    {
+                        <td>@Html.DisplayFor(model => order.status)</td>
+                    }
+                    else
+                    {
+                        <td>@Html.DropDownListFor(model => order.status, new SelectList(selectItems, "Value", "Text", order.status))</td>
+                    }
+                </tr>
+            </table>
+        }
+        <input type="submit" value="変更" name="update" /><input type="submit" value="検索結果に戻る" />
+    }
+</body>
+</html>

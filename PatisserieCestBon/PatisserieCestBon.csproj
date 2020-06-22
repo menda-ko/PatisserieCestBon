@@ -245,6 +245,10 @@
     <Content Include="Views\Stock\StockUpdate1.cshtml" />
     <Content Include="Views\Order\StatusCheck.cshtml" />
     <Content Include="Views\Order\OrderCancel1.cshtml" />
+    <Content Include="Views\Order\OrderSerch1.cshtml" />
+    <Content Include="Views\Order\OrderSerch2.cshtml" />
+    <Content Include="Views\Order\OrderUpdate1.cshtml" />
+    <Content Include="Views\Order\OrderUpdate2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Cart\" />
@@ -295,6 +299,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4bootstrap-theme_1css_1map__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

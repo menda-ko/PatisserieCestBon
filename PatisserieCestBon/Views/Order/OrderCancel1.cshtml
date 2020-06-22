@@ -8,20 +8,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>StatusCheck</title>
+    <title>OrderCancel1</title>
 </head>
 <body>
-    <h2>ご注文ステータス確認</h2>
-    <a>現在ご注文いただいている商品のステータスは以下のとおりです。</a>
-    <a>発送済み商品のないご注文については、キャンセルが可能です。</a><br />
-    @using (Html.BeginForm("OrderCancel1", "Order", FormMethod.Post))
+    <h2>ご注文のお取消し確認</h2>
+    <a>以下のご注文のキャンセルを承ります。</a>
+    <a>内容をご確認の上、よろしければ「キャンセル」ボタンを押してください。</a><br />
+    @using (Html.BeginForm("OrderCancel2", "Order", FormMethod.Post))
     {
         foreach (var group in Model)
         {
-            @*decimal orderNo = orderInfo.orderNo;
-                    <input type="hidden"name="orderNo" value="@orderNo"/>*@
-            @Html.HiddenFor(model => group.Key,new { name="groupKey"})
-            <a>ご注文番号:@group.Key.ToString("000000")</a><input name="cancel" type="submit" value="この注文をキャンセル" />
+            @Html.HiddenFor(model => group.Key)
+            <a>ご注文番号:@group.Key.ToString("000000")</a>
             <table border="1">
                 <tr>
                     <th>商品番号</th>
@@ -30,9 +28,10 @@
                     <th>希望納期</th>
                     <th>ステータス</th>
                 </tr>
+
                 @foreach (var order in group)
                 {
-                    @Html.HiddenFor(model => order.orderNo,new { name="itemNo"})
+                    @Html.HiddenFor(model => order.customerId)
                     <tr>
                         <td>@order.itemNo.ToString("0000")</td>
                         <td>@order.itemName</td>
@@ -42,6 +41,7 @@
                     </tr>
                 }
             </table>
+            <input name="cancel" type="submit" value="キャンセル" /><input name="back" type="submit" value="戻る" />
         }
     }
 </body>
