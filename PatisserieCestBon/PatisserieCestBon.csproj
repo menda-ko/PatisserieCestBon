@@ -278,12 +278,12 @@
     <Content Include="Views\Item\Catalog.cshtml" />
     <Content Include="Views\Cart\CartCheck.cshtml" />
     <Content Include="Views\Order\Add.cshtml" />
-    <Content Include="Views\Employee\List.cshtml" />
-    <Content Include="Views\Employee\Add1.cshtml" />
-    <Content Include="Views\Employee\Add2.cshtml" />
-    <Content Include="Views\Employee\Update1.cshtml" />
-    <Content Include="Views\Employee\Update2.cshtml" />
-    <Content Include="Views\Employee\Delete1.cshtml" />
+    <Content Include="Views\Employee\EmployeeAdd1.cshtml" />
+    <Content Include="Views\Employee\EmployeeAdd2.cshtml" />
+    <Content Include="Views\Employee\EmployeeDelete1.cshtml" />
+    <Content Include="Views\Employee\EmployeeList.cshtml" />
+    <Content Include="Views\Employee\EmployeeUpdate1.cshtml" />
+    <Content Include="Views\Employee\EmployeeUpdate2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
