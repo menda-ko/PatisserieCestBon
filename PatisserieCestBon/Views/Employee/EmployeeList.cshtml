@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "EmployeeList";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -42,7 +43,7 @@
         </table>
         <br>
         <input type="submit" value="新規追加" formaction="/Employee/Add1">
-        <input type="submit" value="削除" formaction="/Employee/Delete1" >
+        <input type="submit" value="削除" formaction="/Employee/Delete1">
     </form>
 
 

@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "EmployeeDelete1";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -15,13 +16,18 @@
         内容を確認の上、「削除」ボタンを押してください。<br><br>
         <table border="1">
             <tr><td>社員番号</td><td>担当者氏名</td></tr>
-            <tr><td><input type="hidden" name="empno" value="@ViewBag.EmpNo">
-                @ViewBag.EmpNo</td><td>@ViewBag.EmpName</td></tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="empno" value="@ViewBag.EmpNo">
+                    @ViewBag.EmpNo
+                </td>
+                <td>@ViewBag.EmpName</td>
+            </tr>
 
         </table>
         <br>
-        <input type="submit" value="削除" formaction= "/Employee/Delete2">
-        <input type="submit" value="戻る" formaction= "/Employee/List2">
+        <input type="submit" value="削除" formaction="/Employee/Delete2">
+        <input type="submit" value="戻る" formaction="/Employee/List2">
     </form>
 </body>
 </html>

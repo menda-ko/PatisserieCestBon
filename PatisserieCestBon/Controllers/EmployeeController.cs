@@ -10,18 +10,16 @@ namespace PatisserieCestBon.Controllers
 {
     public class EmployeeController : Controller
     {
-        // GET: Employee
-        public ActionResult List1()
+
+
+        public ActionResult List()
         {
-            using (var db = new DatabaseEntities())
+            // セッション確認
+            if (Session["loginUserName"] == null)
             {
-                var e = db.Employees.ToList();
-                ViewBag.E = e;
-                return View("EmployeeList");
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
             }
-        }
-        public ActionResult List2()
-        {
             using (var db = new DatabaseEntities())
             {
                 var e = db.Employees.ToList();
@@ -31,11 +29,23 @@ namespace PatisserieCestBon.Controllers
         }
         public ActionResult Add1()
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             return View("EmployeeAdd1");
         }
         public ActionResult Add2(string empno, string empname, string password1, string password2)
 
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             int p = 0;
             bool b = Regex.IsMatch(password1, @"^[!-~]*$");
             if (b.Equals(false))
@@ -115,6 +125,12 @@ namespace PatisserieCestBon.Controllers
         
         public ActionResult Add3(int empno, string empname, string password)
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             using (var db = new DatabaseEntities())
             {
                     var u = new Employee
@@ -135,6 +151,12 @@ namespace PatisserieCestBon.Controllers
         
         public ActionResult Update1(int empno, string empname, string password)
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             ViewBag.EmpNo = empno;
             ViewBag.EmpName = empname;
             ViewBag.Password = password;
@@ -142,6 +164,12 @@ namespace PatisserieCestBon.Controllers
         }
         public ActionResult Update2(int empno, string empname, string password1, string password2)
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             int p = 0;
             ViewBag.EmpNo = empno;
             bool b = Regex.IsMatch(password1, @"^[!-~]*$");
@@ -200,6 +228,12 @@ namespace PatisserieCestBon.Controllers
         }
         public ActionResult Update3(int empno, string empname, string password)
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             using (var db = new DatabaseEntities())
             {
                 var u = db.Employees.Find(empno);
@@ -217,7 +251,12 @@ namespace PatisserieCestBon.Controllers
         }
         public ActionResult Delete1(string empno)
         {
-
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             if (empno == null)
             {
                 using (var db = new DatabaseEntities())
@@ -260,6 +299,12 @@ namespace PatisserieCestBon.Controllers
         }
         public ActionResult Delete2(int empno)
         {
+            // セッション確認
+            if (Session["loginUserName"] == null)
+            {
+                // セッションが空だったらシステムエラー
+                return Redirect("EmployeeError");
+            }
             using (var db = new DatabaseEntities())
             {
                 var u = db.Employees.Find(empno);

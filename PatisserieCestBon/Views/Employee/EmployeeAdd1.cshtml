@@ -1,7 +1,8 @@
 ﻿@model PatisserieCestBon.Models.Employee
 @{
-    ViewBag.Title = "EmployeeAdd1";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -29,10 +30,10 @@
             <tr><td>パスワード(確認)</td><td><input type="password" name="password2" /></td></tr>
         </table>
         <br>
-        <input type="submit" value="送信" formaction ="/Employee/Add2">
-        <input type="submit" value="戻る" formaction ="/Employee/List2">
+        <input type="submit" value="送信" formaction="/Employee/Add2">
+        <input type="submit" value="戻る" formaction="/Employee/List2">
     </form>
 
 </body>
 </html>
-@*@Html.EditorFor(model => model.empNo)*@
+
