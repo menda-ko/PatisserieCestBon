@@ -18,9 +18,16 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("CustomerError", "Login");
             }
+
+            //int loginCustomerId = Session["loginUserName"];
             using (var db = new DatabaseEntities())
-            {                
+            {
                 var cartList = db.CartInfoes.ToList();
+
+                OrderInfo model = new OrderInfo
+                {
+                };
+                db.OrderInfoes.Add(model);
 
                 //小計
                 int sum = 0;
@@ -36,6 +43,7 @@ namespace PatisserieCestBon.Controllers
                 ViewBag.total = sum + tax;
 
                 ViewBag.cartList = cartList;
+               //ViewBag.customerId = customerId;
 
                 return View();
             }

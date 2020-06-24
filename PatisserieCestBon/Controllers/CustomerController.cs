@@ -31,9 +31,10 @@ namespace PatisserieCestBon.Controllers
             ViewBag.password = password;
             ViewBag.checkPass = checkPass;
 
+
             //会社名の未入力チェック
             int compNameCheck = 0;
-            if (companyName == "")
+            if (String.IsNullOrWhiteSpace(companyName) == true)
             {
                 ViewBag.RecuiredCompanyName = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredCompanyName;
                 compNameCheck = 1;
@@ -42,7 +43,7 @@ namespace PatisserieCestBon.Controllers
 
             //住所の未入力チェック
             int addressCheck = 0;
-            if (address == "")
+            if (String.IsNullOrWhiteSpace(address) == true)
             {
                 ViewBag.RecuiredAddress = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredAddress;
                 addressCheck = 1;
@@ -51,7 +52,7 @@ namespace PatisserieCestBon.Controllers
 
             //電話番号の未入力チェック
             int telNoCheck = 0;
-            if (telNo == "")
+            if (String.IsNullOrWhiteSpace(telNo) == true)
             {
                 ViewBag.RecuiredTelNo = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredTelNo;
                 telNoCheck = 1;
@@ -60,7 +61,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(漢字)の未入力チェック
             int customerNameCheck = 0;
-            if (customerName == "")
+            if (String.IsNullOrWhiteSpace(customerName) == true)
             {
                 ViewBag.RecuiredCustomerName = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredCustomerName;
                 customerNameCheck = 1;
@@ -69,7 +70,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(かな)の未入力チェック
             int customerKanaCheck = 0;
-            if (customerKana == "")
+            if (String.IsNullOrWhiteSpace(customerKana) == true)
             {
                 ViewBag.RecuiredCustomerKana = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredCustomerKana;
                 customerKanaCheck = 1;
@@ -78,7 +79,7 @@ namespace PatisserieCestBon.Controllers
 
             //パスワードの未入力チェック
             int passwordCheck = 0;
-            if (password == "")
+            if (String.IsNullOrWhiteSpace(password) == true)
             {
                 ViewBag.RequiredPassword = PatisserieCestBon.Properties.Settings.Default.p002_error_RecuiredPassword;
                 passwordCheck = 1;
@@ -87,7 +88,7 @@ namespace PatisserieCestBon.Controllers
 
             //パスワード(確認)の未入力チェック
             int retypePasswordCheck = 0;
-            if (checkPass == "")
+            if (String.IsNullOrWhiteSpace(checkPass) == true)
             {
                 ViewBag.RequiredRetypePassword = PatisserieCestBon.Properties.Settings.Default.p002_error_RequiredRetypePassword;
                 retypePasswordCheck = 1;
@@ -114,7 +115,7 @@ namespace PatisserieCestBon.Controllers
 
             //メールアドレスの正規表現
             int formatEmailCheck = 0;
-            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.]{1,20}@[a-zA-Z0-9.]{2,9}$"))
+            if (!Regex.IsMatch(email, @"^[a-z]{1}[a-zA-Z0-9.]{2,31}@[a-zA-Z0-9.]{2,30}$"))
             {
                 ViewBag.formatEmail = PatisserieCestBon.Properties.Settings.Default.p002_error_FormatEmail;
                 formatEmailCheck = 1;
@@ -123,7 +124,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(かな)の正規表現
             int formatKanaCheck = 0;
-            if (!Regex.IsMatch(customerKana, @"^[ぁ-ん]+$"))
+            if (!Regex.IsMatch(customerKana, @"^[ぁ-ん\s]+$"))
             {
                 ViewBag.TypeKana = PatisserieCestBon.Properties.Settings.Default.p002_error_CharTypeKana;
                 formatKanaCheck = 1;
@@ -261,7 +262,7 @@ namespace PatisserieCestBon.Controllers
 
             //会社名の未入力チェック
             int compNameCheck = 0;
-            if (companyName == "")
+            if (String.IsNullOrWhiteSpace(companyName) == true)
             {
                 ViewBag.RecuiredCompanyName = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredCompanyName;
                 compNameCheck = 1;
@@ -270,7 +271,7 @@ namespace PatisserieCestBon.Controllers
 
             //住所の未入力チェック
             int addressCheck = 0;
-            if (address == "")
+            if (String.IsNullOrWhiteSpace(address) == true)
             {
                 ViewBag.RecuiredAddress = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredAddress;
                 addressCheck = 1;
@@ -279,7 +280,7 @@ namespace PatisserieCestBon.Controllers
 
             //電話番号の未入力チェック
             int telNoCheck = 0;
-            if (telNo == "")
+            if (String.IsNullOrWhiteSpace(telNo) == true)
             {
                 ViewBag.RecuiredTelNo = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredTelNo;
                 telNoCheck = 1;
@@ -288,7 +289,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(漢字)の未入力チェック
             int customerNameCheck = 0;
-            if (customerName == "")
+            if (String.IsNullOrWhiteSpace(customerName) == true)
             {
                 ViewBag.RecuiredCustomerName = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredCustomerName;
                 customerNameCheck = 1;
@@ -297,7 +298,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(かな)の未入力チェック
             int customerKanaCheck = 0;
-            if (customerKana == "")
+            if (String.IsNullOrWhiteSpace(customerKana) == true)
             {
                 ViewBag.RecuiredCustomerKana = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredCustomerKana;
                 customerKanaCheck = 1;
@@ -306,7 +307,7 @@ namespace PatisserieCestBon.Controllers
 
             //パスワードの未入力チェック
             int passwordCheck = 0;
-            if (password == "")
+            if (String.IsNullOrWhiteSpace(password) == true)
             {
                 ViewBag.RequiredPassword = PatisserieCestBon.Properties.Settings.Default.p028_error_RecuiredPassword;
                 passwordCheck = 1;
@@ -315,7 +316,7 @@ namespace PatisserieCestBon.Controllers
 
             //パスワード(確認)の未入力チェック
             int retypePasswordCheck = 0;
-            if (checkPass == "")
+            if (String.IsNullOrWhiteSpace(checkPass) == true)
             {
                 ViewBag.RequiredRetypePassword = PatisserieCestBon.Properties.Settings.Default.p028_error_RequiredRetypePassword;
                 retypePasswordCheck = 1;
@@ -342,7 +343,7 @@ namespace PatisserieCestBon.Controllers
 
             //メールアドレスの正規表現
             int formatEmailCheck = 0;
-            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9.]{1,20}@[a-zA-Z0-9.]{2,9}$"))
+            if (!Regex.IsMatch(email, @"^[a-z]{1}[a-zA-Z0-9.]{2,31}@[a-zA-Z0-9.]{2,30}$"))
             {
                 ViewBag.formatEmail = PatisserieCestBon.Properties.Settings.Default.p028_error_FormatEmail;
                 formatEmailCheck = 1;
@@ -351,7 +352,7 @@ namespace PatisserieCestBon.Controllers
 
             //氏名(かな)の正規表現
             int formatKanaCheck = 0;
-            if (!Regex.IsMatch(customerKana, @"^[ぁ-ん]+$"))
+            if (!Regex.IsMatch(customerKana, @"^[ぁ-ん\s]+$"))
             {
                 ViewBag.TypeKana = PatisserieCestBon.Properties.Settings.Default.p028_error_CharTypeKana;
                 formatKanaCheck = 1;
