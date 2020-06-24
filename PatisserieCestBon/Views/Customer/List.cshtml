@@ -34,26 +34,25 @@
 
         <table border="1">
             <tr>
-                <th>顧客ID</th>
-                <th>会社名</th>
-
-                <th>顧客担当者部署</th>
-                <th>顧客担当者名</th>
-                <th>削除</th>
+                <th style="text-align:center">顧客ID</th>
+                <th style="text-align:center">会社名</th>
+                <th style="text-align:center">顧客担当者部署</th>
+                <th style="text-align:center">顧客担当者名</th>
+                <th style="text-align:center">削除</th>
             </tr>
             @foreach (var list in ViewBag.List)
             {
                 <tr>
-                    <th>@list.customerId.ToString("000000")</th>
+                    <th style="text-align:center">@list.customerId.ToString("000000")</th>
                     <form method="post" action="~/Customer/Update1">
                         <input type="hidden" name="customerId" value="@list.customerId" />
-                        <th><input type="submit" value="@list.companyName" style="border:none;background-color:transparent;color:blue;text-decoration:underline;" /></th>
+                        <th style="text-align:center"><input type="submit" value="@list.companyName" style="border:none;background-color:transparent;color:blue;text-decoration:underline;" /></th>
                     </form>
-                    <th>@list.dept</th>
-                    <th>@list.customerName</th>
+                    <th style="text-align:center">@list.dept</th>
+                    <th style="text-align:center">@list.customerName</th>
                     <form method="post" action="~/Customer/Delete1">
                         <input type="hidden" name="customerId" value="@list.customerId" />
-                        <th><input type="submit" value="削除" /></th>
+                        <th style="text-align:center"><input type="submit" value="削除" /></th>
                     </form>
                 </tr>
             }

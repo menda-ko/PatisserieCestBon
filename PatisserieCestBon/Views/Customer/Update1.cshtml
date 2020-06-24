@@ -21,15 +21,14 @@
 
         <form action="/Customer/Update2" method="post" style="display:inline">
             <input type="hidden" name="customerId" value="@ViewBag.customerId">
-            <table>
                 <table border="0">
                     <tr>
-                        <th>顧客ID</th>
+                        <th style="text-align:center">顧客ID</th>
                         <th>@ViewBag.customerId</th>
                     </tr>
                     <tr>
                         <th></th>
-                        <th>会社情報</th>
+                        <th>&emsp;&emsp;&emsp;&emsp;会社情報</th>
                     </tr>
 
                     @if (ViewBag.inappropriateCheck == 1)
@@ -42,7 +41,7 @@
                         <p class="text-danger">@ViewBag.RecuiredCompanyName</p>
                     }
                     <tr>
-                        <th>会社名</th>
+                        <th style="text-align:center">会社名</th>
                         <th><input type="text" name="companyName" maxlength="255" size="30" value="@ViewBag.companyName"></th>
                     </tr>
 
@@ -51,7 +50,7 @@
                         <p class="text-danger">@ViewBag.RecuiredAddress</p>
                     }
                     <tr>
-                        <th>住所</th>
+                        <th style="text-align:center">住所</th>
                         <th><input type="text" name="address" maxlength="255" size="40" value="@ViewBag.address"></th>
                     </tr>
 
@@ -69,13 +68,13 @@
                         <p class="text-danger">@ViewBag.TypeTelNo</p>
                     }
                     <tr>
-                        <th>電話番号</th>
+                        <th style="text-align:center">電話番号</th>
                         <th><input type="text" name="telNo" maxlength="13" size="20" value="@ViewBag.telNo"></th>
 
                     </tr>
                     <tr>
                         <th></th>
-                        <th>ご担当者情報</th>
+                        <th>&emsp;&emsp;顧客担当者情報</th>
                     </tr>
 
                     @if (ViewBag.customerNameCheck == 1)
@@ -83,7 +82,7 @@
                         <p class="text-danger">@ViewBag.RecuiredCustomerName</p>
                     }
                     <tr>
-                        <th>氏名(漢字)</th>
+                        <th style="text-align:center">氏名(漢字)</th>
                         <th><input type="text" name="customerName" maxlength="255" size="30" value="@ViewBag.customerName"></th>
 
                     </tr>
@@ -97,12 +96,12 @@
                         <p class="text-danger">@ViewBag.TypeKana</p>
                     }
                     <tr>
-                        <th>氏名(かな)</th>
+                        <th style="text-align:center">氏名(かな)</th>
                         <th><input type="text" name="customerKana" maxlength="255" size="30" value="@ViewBag.customerKana"></th>
 
                     </tr>
                     <tr>
-                        <th>部署</th>
+                        <th style="text-align:center">部署</th>
                         <th><input type="text" name="dept" maxlength="255" size="20" value="@ViewBag.dept"></th>
                     </tr>
 
@@ -115,13 +114,13 @@
                         <p class="text-danger">@ViewBag.TypeEmail</p>
                     }
                     <tr>
-                        <th>メールアドレス</th>
+                        <th style="text-align:center">メールアドレス</th>
                         <th><input type="text" name="email" maxlength="255" size="40" value="@ViewBag.email"></th>
                     </tr>
 
                     <tr>
                         <th></th>
-                        <th>認証用情報</th>
+                        <th>&emsp;&emsp;&emsp;認証用情報</th>
                     </tr>
 
                     @if (ViewBag.passwordCheck == 1)
@@ -134,7 +133,7 @@
                         <p class="text-danger">@ViewBag.MatchRetypePassword</p>
                     }
                     <tr>
-                        <th>パスワード</th>
+                        <th style="text-align:center">パスワード</th>
                         <th><input type="password" name="password" maxlength="255" size="20" value="@ViewBag.password"></th>
                     </tr>
 
@@ -143,7 +142,7 @@
                         <p class="text-danger">@ViewBag.RequiredRetypePassword</p>
                     }
                     <tr>
-                        <th>パスワード(確認)</th>
+                        <th style="text-align:center">パスワード(確認)</th>
                         <th><input type="password" name="checkPass" maxlength="255" size="20" value="@ViewBag.checkPass"></th>
                     </tr>
                 </table>
@@ -154,7 +153,7 @@
         <form action="~/Customer/List" method="post" style="display:inline">
             <input type="submit" value="戻る" />
         </form>
-        <input type="button" value="リセット" onClick="clearFormAll(); " style="display:inline" />
+        <input type="button" value="クリア" onClick="clearFormAll(); " style="display:inline" />
     </div>
 </body>
 </html>

@@ -29,33 +29,33 @@
 
             <table border="1">
                 <tr>
-                    <td>商品番号</td>
-                    <td>商品名</td>
-                    <td>単価</td>
-                    <td>数量</td>
-                    <td>希望納期</td>
-                    <td>金額</td>
-                    <td>削除</td>
+                    <td style="text-align:center">商品番号</td>
+                    <td style="text-align:center">商品名</td>
+                    <td style="text-align:center">単価</td>
+                    <td style="text-align:center">数量</td>
+                    <td style="text-align:center">希望納期</td>
+                    <td style="text-align:center">金額</td>
+                    <td style="text-align:center">削除</td>
                 </tr>
-                @foreach (var cart in @ViewBag.cartList)
+                @foreach (var cart in ViewBag.cartList)
                 {
                     <tr>
-                        <td>@cart.itemNo </td>
+                        <td>@cart.itemNo.ToString("0000") </td>
                         <td>@cart.itemName</td>
-                        <td>@cart.unitPrice</td>
+                        <td>&yen;@String.Format("{0:#,0}-", cart.unitPrice)</td>
                         <td><input type="text" value="@cart.quantity" size="3" /></td>
-                        <td><input type="text" id="receiptDate" value="@cart.deliveryDate" /></td>
-                        <td>@(cart.quantity * cart.unitPrice)</td>
+                        <td><input type="text" id="receiptDate" value="@cart.deliveryDate.ToString("yyyy/MM/dd")" /></td>
+                        <td>&yen;@String.Format("{0:#,0}-", (cart.quantity * cart.unitPrice))</td>
                         <td><input type="checkbox" name="delete" /></td>
                     </tr>
                 }
 
-                <tr><td rowspan="3"></td><td colspan="4">小計</td><td>&yen;@ViewBag.subTotal</td></tr>
-                <tr><td colspan="4">消費税</td><td>&yen;@ViewBag.tax</td></tr>
-                <tr><td colspan="4">合計</td><td>&yen;@ViewBag.total</td></tr>
+                <tr><td rowspan="3"></td><td colspan="4" style="text-align:right">小計</td><td>&yen;@String.Format("{0:#,0}-", ViewBag.subTotal)</td><td rowspan="3"></td></tr>
+                <tr><td colspan="4" style="text-align:right">消費税</td><td>&yen;@String.Format("{0:#,0}-", ViewBag.tax)</td></tr>
+                <tr><td colspan="4" style="text-align:right">合計</td><td>&yen;@String.Format("{0:#,0}-", ViewBag.tax)</td></tr>
             </table>
-            <input type="hidden" name="cartInfo" value="@ViewBag.cartList" />
             <input type="hidden" name="subtotal" value="@ViewBag.subtotal" />
+            <input type="hidden" name="customerId" value="@ViewBag.customerId" />
             <input type="hidden" name="tax" value="@ViewBag.tax" />
             <input type="hidden" name="total" value="@ViewBag.total" />
             <input type="submit" value="注文" />
