@@ -20,27 +20,27 @@
         <p class="text-danger">@ViewBag.ErrorRecuiredRetypePassword</p>
         <p class="text-danger">@ViewBag.ErrorCharTypePassword</p>
         <br>
-        <table border="1">
+        <table border="1" align="center" width="400px">
             <tr>
                 <td>社員番号</td>
                 <td><input type="hidden" name="empno" value="@ViewBag.EmpNo">@ViewBag.EmpNo</td>
             </tr>
             <tr>
                 <td>担当者氏名</td>
-                <td><input type="text" name="empname" value="@ViewBag.EmpName"></td>
+                <td><input type="text" name="empname" style="width:100%" value="@ViewBag.EmpName"></td>
             </tr>
             <tr>
                 <td>パスワード</td>
-                <td><input type="password" name="password1" value="@ViewBag.Password"></td>
+                <td><input type="password" name="password1" style="width:100%" value="@ViewBag.Password"></td>
             </tr>
             <tr>
                 <td>パスワード(確認)</td>
-                <td><input type="password" name="password2" value="@ViewBag.Password"></td>
+                <td><input type="password" name="password2" style="width:100%" value="@ViewBag.Password"></td>
             </tr>
         </table>
         <br>
         <input type="submit" value="送信" formaction="/Employee/Update2">
-        <input type="submit" value="戻る" formaction="/Employee/List2">
+        <input type="submit" value="戻る" formaction="/Employee/List">
     </form>
 </body>
 </html>

@@ -23,15 +23,15 @@
         <p class="text-danger">@ViewBag.ErrorFormatEmployeeId</p>
         <p class="text-danger">@ViewBag.ErrorCharTypePassword</p>
         <p class="text-danger">@ViewBag.ErrorDuplicatedEmployeeId</p><br>
-        <table border="1">
-            <tr><td>社員番号</td><td><input type="text" name="empno" /></td></tr>
-            <tr><td>担当者氏名</td><td><input type="text" name="empname" /></td></tr>
-            <tr><td>パスワード</td><td><input type="password" name="password1" /></td></tr>
-            <tr><td>パスワード(確認)</td><td><input type="password" name="password2" /></td></tr>
+        <table border="1" align="center" width="400px">
+            <tr><td>社員番号</td><td><input type="text" name="empno" style="width:100%"/></td></tr>
+            <tr><td>担当者氏名</td><td><input type="text" name="empname" style="width:100%"/></td></tr>
+            <tr><td>パスワード</td><td><input type="password" name="password1" style="width:100%"/></td></tr>
+            <tr><td>パスワード(確認)</td><td><input type="password" name="password2" style="width:100%"/></td></tr>
         </table>
         <br>
         <input type="submit" value="送信" formaction="/Employee/Add2">
-        <input type="submit" value="戻る" formaction="/Employee/List2">
+        <input type="submit" value="戻る" formaction="/Employee/List">
     </form>
 
 </body>
