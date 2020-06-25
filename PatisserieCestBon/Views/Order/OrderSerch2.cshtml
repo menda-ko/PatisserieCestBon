@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<PatisserieCestBon.Models.OrderInfo>
 @{
     Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+    
 }
 
 <!DOCTYPE html>
@@ -15,26 +16,26 @@
     <b>以下の条件で検索を行いました。</b><br />
     <b>受注ステータスを変更する場合は、検索結果から</b><br />
     <b>「ご注文番号-明細」リンクをクリックしてください。</b><br />
-    <table>
+    <table align="center">
             <tr>
                 <th>顧客ID</th>
-                <td>@ViewBag.order.customerId</td>
+                <td>@ViewBag.customerId</td>
             </tr>
             <tr>
                 <th>ご注文番号</th>
-                <td>@ViewBag.order.orderNo</td>
+                <td>@ViewBag.orderNo</td>
             </tr>
             <tr>
                 <th>希望納期</th>
-                <td>@ViewBag.deliveryFrom～@ViewBag.deliveryTo</td>
+                <td>@string.Format("{0:yyyy/MM/dd}",@ViewBag.deliveryFrom)～@string.Format("{0:yyyy/MM/dd}",@ViewBag.deliveryTo)</td>
             </tr>
             <tr>
                 <th>受注日時</th>
-                <td>@ViewBag.orderFrom～@ViewBag.orderTo</td>
+                <td>@string.Format("{0:yyyy/MM/dd}", @ViewBag.orderFrom)～@string.Format("{0:yyyy/MM/dd}",@ViewBag.orderTo)</td>
             </tr>
             <tr>
                 <th>ステータス</th>
-                <td>@ViewBag.order.status</td>
+                <td>@ViewBag.status</td>
             </tr>
         </table>
   　<b>検索結果</b>
@@ -58,7 +59,7 @@
                <td>@Html.ActionLink(orderNo.ToString("000000") + "-" + seqNo.ToString("000"), "OrderUpdate1", new { orderInfo.orderNo, orderInfo.orderSeqNo })</td>
                <td>@itemNo.ToString("0000")</td>
                <td>@Html.DisplayFor(model => orderInfo.itemName)</td>
-               <td>@Html.DisplayFor(model => orderInfo.quantity)</td>
+               <td>@orderInfo.quantity</td>
                <td>@Html.DisplayFor(model => orderInfo.deliveryDate)</td>
                <td>@Html.DisplayFor(model => orderInfo.status)</td>
            </tr>

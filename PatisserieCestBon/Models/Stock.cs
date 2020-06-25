@@ -11,12 +11,14 @@ namespace PatisserieCestBon.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Stock
     {
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
-        public decimal stock { get; set; }
+        public decimal? stock { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public Nullable<System.DateTime> receiptDate { get; set; }
     
         public virtual Item Item { get; set; }

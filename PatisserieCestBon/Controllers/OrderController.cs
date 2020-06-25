@@ -50,7 +50,7 @@ namespace PatisserieCestBon.Controllers
             ViewBag.total = total;
             return View();
         }
-        public ActionResult OrderSerch2(OrderInfo order, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo)
+        public ActionResult OrderSerch2(OrderInfo order, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo,string backResult)
         {
             // セッション確認
             if (Session["loginUserName"] == null)
@@ -58,10 +58,7 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("EmployeeError", "Login");
             }
-            if (!ModelState.IsValid)
-            {
-                return View("OrderSerch1");
-            }
+
             using (var db = new DatabaseEntities())
             {
                 //検索条件のステータスがすべてじゃない
@@ -72,19 +69,42 @@ namespace PatisserieCestBon.Controllers
                                            .WhereIf(deliveryFrom != null, e => e.deliveryDate >= deliveryFrom & e.deliveryDate <= deliveryTo)
                                            .WhereIf(orderFrom != null, e => e.orderDate >= orderFrom & e.orderDate <= orderTo)
                                            .WhereIf(order.status != null, e => e.status == order.status).ToList();
+                    if(ul.Count == 0)
+                    {
+                        ViewBag.ErrorMessage = Properties.Settings.Default.p015_error_NoMatch;
+                        return View("OrderSerch1");
+                    }
+
+                    ViewBag.customerId = order.customerId.ToString("000000");
+                    ViewBag.orderNo = order.orderNo.ToString("00000000");
+                    ViewBag.deliveryFrom = deliveryFrom;
+                    ViewBag.deliveryTo = deliveryTo;
+                    ViewBag.orderFrom = orderFrom;
+                    ViewBag.orderTo = orderTo;
+                    ViewBag.status = order.status;
                     return View(ul);
                 }
+                
                 else
                 {
                     var ul = db.OrderInfoes.WhereIf(order.customerId != 0, e => e.customerId.ToString().Contains(order.customerId.ToString()))
                                            .WhereIf(order.orderNo != 0, e => e.orderNo.ToString().Contains(order.orderNo.ToString()))
                                            .WhereIf(deliveryFrom != null, e => e.deliveryDate >= deliveryFrom & e.deliveryDate <= deliveryTo)
                                            .WhereIf(orderFrom != null, e => e.orderDate >= orderFrom & e.orderDate <= orderTo).ToList();
-                    ViewBag.order = order;
+
+                    if (ul.Count == 0)
+                    {
+                        ViewBag.ErrorMessage = Properties.Settings.Default.p015_error_NoMatch;
+                        return View("OrderSerch1");
+                    }
+
+                    ViewBag.customerId = order.customerId.ToString("000000");
+                    ViewBag.orderNo = order.orderNo.ToString("00000000");
                     ViewBag.deliveryFrom = deliveryFrom;
                     ViewBag.deliveryTo = deliveryTo;
                     ViewBag.orderFrom = orderFrom;
                     ViewBag.orderTo = orderTo;
+                    ViewBag.status = order.status;
                     return View(ul);
                 }
             }
@@ -136,9 +156,10 @@ namespace PatisserieCestBon.Controllers
                 }
                 db.SaveChanges();
                 return View("OrderUpdate2", list);
+
             }
         }
-        public ActionResult OrderCancel1(OrderInfo orderInfo,Decimal groupKey)
+        public ActionResult OrderCancel1(OrderInfo orderInfo,int orderNo)
         {
             // セッション確認
             if (Session["loginUserName"] == null)
@@ -148,16 +169,28 @@ namespace PatisserieCestBon.Controllers
             }
             using (var db = new DatabaseEntities())
             {
-                var ul = from e in db.OrderInfoes
-                         where
-                               e.orderNo == groupKey
-                         group
-                               e by e.orderNo;
+                var ul = db.OrderInfoes.Where(e => e.orderNo == orderNo);
                 var list = ul.ToList();
-                return View(ul);
+                foreach(var order in list)
+                {
+                    if (order.status != "未出荷")
+                    {
+                        ViewBag.ErrorMessage = Properties.Settings.Default.p011_error_CannotCancel;
+                        /*string customerId = (string)Session["loginUserName"];
+                        int customerIdInt = int.Parse(customerId);
+                        var u = from e in db.OrderInfoes
+                                 where
+                                        e.customerId == customerIdInt
+                                 group
+                                        e by e.orderNo;
+                        var orderlist = ul.ToList();*/
+                        return StatusCheck();
+                    }
+                }
+                return View(list);
             }
         }
-        public ActionResult OrderCancel2(OrderInfo orderInfo, string back, string cancel)
+        public ActionResult OrderCancel2(string back, string cancel,int customerId,int orderNo)
         {
             // セッション確認
             if (Session["loginUserName"] == null)
@@ -171,24 +204,36 @@ namespace PatisserieCestBon.Controllers
                 if (back != null)
                 {
                     //顧客IDを元に
-                    var ul = db.OrderInfoes.Where(e => e.customerId == orderInfo.customerId).ToList();
-                    return View("StatusCheck", ul);
+                    var ul = from e in db.OrderInfoes
+                             where
+                                    e.customerId == customerId
+                             group
+                                    e by e.orderNo;
+                    var list = ul.ToList();
+                    return View("StatusCheck", list);
                 }
                 //キャンセルボタンが押された
                 if (cancel != null)
                 {
-                    var ul = db.OrderInfoes.Where(e => e.orderNo == orderInfo.orderNo).ToList();
-                    foreach (var orderStatus in ul)
+                    
+                    var ul = db.OrderInfoes.Where(e => e.orderNo == orderNo).ToList();
+                        foreach (var orderStatus in ul)
                     {
                         orderStatus.status = "キャンセル";
                     }
                     db.SaveChanges();
-                    return View("StatusCheck", ul);
+                    var order = from e in db.OrderInfoes
+                             where
+                                    e.customerId == customerId
+                             group
+                                    e by e.orderNo;
+                    var list = order.ToList();
+                    return View("StatusCheck",list);
                 }
                 return View();
             }
         }
-        public ActionResult StatusCheck(OrderInfo orderInfo)
+        public ActionResult StatusCheck()
         {
             // セッション確認
             if (Session["loginUserName"] == null)
@@ -196,15 +241,17 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("CustomerError", "Login");
             }
+            string customerId = (string)Session["loginUserName"];
+            int customerIdInt = int.Parse(customerId);
             using (var db = new DatabaseEntities())
             {
                 var ul = from e in db.OrderInfoes
                          where
-                                e.customerId == orderInfo.customerId
+                                e.customerId == customerIdInt
                          group
                                 e by e.orderNo;
                 var list = ul.ToList();
-                return View(list);
+                return View("StatusCheck",list);
             }
         }
     }

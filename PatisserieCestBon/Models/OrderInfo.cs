@@ -11,7 +11,8 @@ namespace PatisserieCestBon.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrderInfo
     {
         public decimal orderNo { get; set; }
@@ -19,7 +20,9 @@ namespace PatisserieCestBon.Models
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
         public decimal quantity { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime deliveryDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime orderDate { get; set; }
         public string status { get; set; }
         public decimal customerId { get; set; }

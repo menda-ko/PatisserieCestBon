@@ -26,9 +26,13 @@
     <h2>受注情報検索</h2>
     <b>受注情報を検索します。</b><br />
     <b>検索条件を入力して、「検索」ボタンを押してください。</b><br />
+    @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
     @using (Html.BeginForm("OrderSerch2", "Order", FormMethod.Post))
     {
-        <table>
+        <table align="center">
             <tr>
                 <th>顧客ID</th>
                 <td>@Html.TextBoxFor(model => Model.customerId)</td>

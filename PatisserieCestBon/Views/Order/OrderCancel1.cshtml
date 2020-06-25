@@ -12,15 +12,15 @@
 </head>
 <body>
     <h2>ご注文のお取消し確認</h2>
-    <a>以下のご注文のキャンセルを承ります。</a>
-    <a>内容をご確認の上、よろしければ「キャンセル」ボタンを押してください。</a><br />
+    <b>以下のご注文のキャンセルを承ります。</b><br />
+    <b>内容をご確認の上、よろしければ「キャンセル」ボタンを押してください。</b><br />
     @using (Html.BeginForm("OrderCancel2", "Order", FormMethod.Post))
     {
         foreach (var group in Model)
         {
             @Html.HiddenFor(model => group.Key)
-            <a>ご注文番号:@group.Key.ToString("000000")</a>
-            <table border="1">
+            <b>ご注文番号:@group.Key.ToString("000000")</b>
+            <table border="1" align="center">
                 <tr>
                     <th>商品番号</th>
                     <th>商品名</th>
@@ -31,9 +31,11 @@
 
                 @foreach (var order in group)
                 {
-                    @Html.HiddenFor(model => order.customerId)
                     <tr>
-                        <td>@order.itemNo.ToString("0000")</td>
+                        <td>
+                            <input type="hidden"name="customerId"value="@order.customerId"/>
+                            <input type="hidden"name="orderNo"value="@order.orderNo" />
+                            @order.itemNo.ToString("0000")</td>
                         <td>@order.itemName</td>
                         <td>@order.quantity</td>
                         <td>@order.deliveryDate</td>
