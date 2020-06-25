@@ -219,35 +219,20 @@ namespace PatisserieCestBon.Controllers
             }
             using (var db = new DatabaseEntities())
             {
-                try
-                {
 
-                    //更新入力画面の初期値の設定
-                    ViewBag.model = db.Customers.Find(customerId);
-                    ViewBag.customerId = customerId.ToString("000000");
-                    ViewBag.companyName = db.Customers.Find(customerId).companyName;
-                    ViewBag.address = db.Customers.Find(customerId).address;
-                    ViewBag.telNo = db.Customers.Find(customerId).telNo;
-                    ViewBag.customerName = db.Customers.Find(customerId).customerName;
-                    ViewBag.customerKana = db.Customers.Find(customerId).customerKana;
-                    ViewBag.dept = db.Customers.Find(customerId).dept;
-                    ViewBag.email = db.Customers.Find(customerId).email;
-                    ViewBag.password = db.Customers.Find(customerId).password;
-                    ViewBag.checkPass = db.Customers.Find(customerId).password;
+                //更新入力画面の初期値の設定
+                ViewBag.model = db.Customers.Find(customerId);
+                ViewBag.customerId = customerId.ToString("000000");
+                ViewBag.companyName = db.Customers.Find(customerId).companyName;
+                ViewBag.address = db.Customers.Find(customerId).address;
+                ViewBag.telNo = db.Customers.Find(customerId).telNo;
+                ViewBag.customerName = db.Customers.Find(customerId).customerName;
+                ViewBag.customerKana = db.Customers.Find(customerId).customerKana;
+                ViewBag.dept = db.Customers.Find(customerId).dept;
+                ViewBag.email = db.Customers.Find(customerId).email;
+                ViewBag.password = db.Customers.Find(customerId).password;
+                ViewBag.checkPass = db.Customers.Find(customerId).password;
 
-                }
-                catch (NullReferenceException)
-                {
-                    //削除されている顧客を更新しようとしたときに走る処理
-                    ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
-                    ViewBag.alreadyDelete = 1;
-                    return View("List");
-                }
-                finally
-                {
-                    //顧客一覧を表示用のViewBag
-                    ViewBag.List = db.Customers.ToList();
-                }
             }
             return View();
         }
@@ -416,72 +401,30 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("EmployeeError", "Login");
             }
-
-            using (var db = new DatabaseEntities())
-            {
-                var u = db.Customers.Find(customerId);
-                u.companyName = companyName;
-                u.address = address;
-                u.telNo = telNo;
-                u.customerName = customerName;
-                u.customerKana = customerKana;
-                u.dept = dept;
-                u.email = email;
-                u.password = password;
-
-                //入力した文字数によっては動かない場合あり
-                db.SaveChanges();
-                ViewBag.updateSuccess = PatisserieCestBon.Properties.Settings.Default.p027_info_UpdateSuccess;
-                ViewBag.updateCheck = 1;
-
-                //顧客一覧を表示用のViewBag
-                ViewBag.List = db.Customers.ToList();
-
-                return View("List");
-            }
-        }
-
-        public ActionResult Delete1(int customerId)
-        {
-            if (Session["loginUserName"] == null)
-            {
-                // セッションが空だったらシステムエラー
-                return RedirectToAction("EmployeeError", "Login");
-            }
-
-            using (var db = new DatabaseEntities())
-            {
-
-                ViewBag.model = db.Customers.Find(customerId);
-
-                return View();
-            }
-
-        }
-
-        public ActionResult Delete2(int customerId)
-        {
-            if (Session["loginUserName"] == null)
-            {
-                // セッションが空だったらシステムエラー
-                return RedirectToAction("EmployeeError", "Login");
-            }
-
             using (var db = new DatabaseEntities())
             {
                 try
                 {
-                    //削除処理
+
                     var u = db.Customers.Find(customerId);
-                    db.Customers.Remove(u);
+                    u.companyName = companyName;
+                    u.address = address;
+                    u.telNo = telNo;
+                    u.customerName = customerName;
+                    u.customerKana = customerKana;
+                    u.dept = dept;
+                    u.email = email;
+                    u.password = password;
+
+                    //入力した文字数によっては動かない場合あり
                     db.SaveChanges();
-                    ViewBag.deleteSuccess = PatisserieCestBon.Properties.Settings.Default.p027_info_DeleteSuccess;
-                    ViewBag.deleteCheck = 1;
+                    ViewBag.updateSuccess = PatisserieCestBon.Properties.Settings.Default.p027_info_UpdateSuccess;
+                    ViewBag.updateCheck = 1;
 
                 }
-                catch (Exception)
+                catch (NullReferenceException)
                 {
-                    //削除されている顧客を再び削除しようとしたときに走る処理
+                    //削除されている顧客を更新しようとしたときに走る処理
                     ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
                     ViewBag.alreadyDelete = 1;
                 }
@@ -492,9 +435,63 @@ namespace PatisserieCestBon.Controllers
                 }
 
                 return View("List");
+            }
+        }
+
+        public ActionResult Delete1(int customerId)
+            {
+                if (Session["loginUserName"] == null)
+                {
+                    // セッションが空だったらシステムエラー
+                    return RedirectToAction("EmployeeError", "Login");
+                }
+
+                using (var db = new DatabaseEntities())
+                {
+
+                    ViewBag.model = db.Customers.Find(customerId);
+
+                    return View();
+                }
 
             }
 
+            public ActionResult Delete2(int customerId)
+            {
+                if (Session["loginUserName"] == null)
+                {
+                    // セッションが空だったらシステムエラー
+                    return RedirectToAction("EmployeeError", "Login");
+                }
+
+                using (var db = new DatabaseEntities())
+                {
+                    try
+                    {
+                        //削除処理
+                        var u = db.Customers.Find(customerId);
+                        db.Customers.Remove(u);
+                        db.SaveChanges();
+                        ViewBag.deleteSuccess = PatisserieCestBon.Properties.Settings.Default.p027_info_DeleteSuccess;
+                        ViewBag.deleteCheck = 1;
+
+                    }
+                    catch (Exception)
+                    {
+                        //削除されている顧客を再び削除しようとしたときに走る処理
+                        ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
+                        ViewBag.alreadyDelete = 1;
+                    }
+                    finally
+                    {
+                        //顧客一覧を表示用のViewBag
+                        ViewBag.List = db.Customers.ToList();
+                    }
+
+                    return View("List");
+
+                }
+
+            }
         }
     }
-}
