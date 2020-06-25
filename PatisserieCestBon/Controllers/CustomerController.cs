@@ -195,7 +195,6 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("EmployeeError", "Login");
             }
-
             using (var db = new DatabaseEntities())
             {
 
@@ -206,8 +205,9 @@ namespace PatisserieCestBon.Controllers
                 ViewBag.deleteCheck = 0;
                 ViewBag.alreadyDelete = 0;
 
-                return View();
+
             }
+            return View();
 
         }
         public ActionResult Update1(int customerId)
@@ -217,24 +217,39 @@ namespace PatisserieCestBon.Controllers
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("EmployeeError", "Login");
             }
-
             using (var db = new DatabaseEntities())
             {
-                //更新入力画面の初期値の設定
-                ViewBag.model = db.Customers.Find(customerId);
-                ViewBag.customerId = customerId.ToString("000000");
-                ViewBag.companyName = db.Customers.Find(customerId).companyName;
-                ViewBag.address = db.Customers.Find(customerId).address;
-                ViewBag.telNo = db.Customers.Find(customerId).telNo;
-                ViewBag.customerName = db.Customers.Find(customerId).customerName;
-                ViewBag.customerKana = db.Customers.Find(customerId).customerKana;
-                ViewBag.dept = db.Customers.Find(customerId).dept;
-                ViewBag.email = db.Customers.Find(customerId).email;
-                ViewBag.password = db.Customers.Find(customerId).password;
-                ViewBag.checkPass = db.Customers.Find(customerId).password;
-                
-                return View();
+                try
+                {
+
+                    //更新入力画面の初期値の設定
+                    ViewBag.model = db.Customers.Find(customerId);
+                    ViewBag.customerId = customerId.ToString("000000");
+                    ViewBag.companyName = db.Customers.Find(customerId).companyName;
+                    ViewBag.address = db.Customers.Find(customerId).address;
+                    ViewBag.telNo = db.Customers.Find(customerId).telNo;
+                    ViewBag.customerName = db.Customers.Find(customerId).customerName;
+                    ViewBag.customerKana = db.Customers.Find(customerId).customerKana;
+                    ViewBag.dept = db.Customers.Find(customerId).dept;
+                    ViewBag.email = db.Customers.Find(customerId).email;
+                    ViewBag.password = db.Customers.Find(customerId).password;
+                    ViewBag.checkPass = db.Customers.Find(customerId).password;
+
+                }
+                catch (NullReferenceException)
+                {
+                    //削除されている顧客を再び削除しようとしたときに走る処理
+                    ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
+                    ViewBag.alreadyDelete = 1;
+                    return View("List");
+                }
+                finally
+                {
+                    //顧客一覧を表示用のViewBag
+                    ViewBag.List = db.Customers.ToList();
+                }
             }
+            return View();
         }
 
         public ActionResult Update2(int customerId, string companyName, string address, string telNo, string customerName, string customerKana, string dept, string email, string password, string checkPass)
@@ -377,13 +392,13 @@ namespace PatisserieCestBon.Controllers
                 ViewBag.typeTelCheck = typeTelCheck;
             }
 
-            if(formatTelNoCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
+            if (formatTelNoCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
             {
                 //不正な値チェック
                 inappropriateCheck = 1;
                 ViewBag.inappropriateCheck = inappropriateCheck;
             }
-            
+
             //入力項目に不備があった際に入力画面に遷移させる処理
             if (compNameCheck == 1 || addressCheck == 1 || telNoCheck == 1 || customerNameCheck == 1 ||
                customerKanaCheck == 1 || passwordCheck == 1 || retypePasswordCheck == 1 || matchPasswordCheck == 1 ||
@@ -464,7 +479,7 @@ namespace PatisserieCestBon.Controllers
                     ViewBag.deleteCheck = 1;
 
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     //削除されている顧客を再び削除しようとしたときに走る処理
                     ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
