@@ -24,15 +24,14 @@
         <p class="text-danger">@ViewBag.ErrorNotChecked</p>
         <p class="text-danger">@ViewBag.ErrorAlreadyDeletedEmployee</p>
         <br>
-        <table border="1">
+        <table border="1" align="center" width="400px">
             <tr><td>社員番号</td><td>担当者氏名</td><td>削除</td></tr>
             @foreach (var num in ViewBag.E)
             {
                 <tr>
                     <td>@num.empNo</td>
                     <td>
-                        <a href="/Employee/Update1?empno=@num.empNo&
-                           empname=@num.empName&password=@num.password">@num.empName</a>
+                        <a href="/Employee/Update1?empno=@num.empNo&empname=@num.empName&password=@num.password">@num.empName</a>
                     </td>
                     <td>
                         <input type="checkbox" name="empno" value="@num.empNo">
