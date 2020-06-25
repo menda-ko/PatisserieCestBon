@@ -238,7 +238,7 @@ namespace PatisserieCestBon.Controllers
                 }
                 catch (NullReferenceException)
                 {
-                    //削除されている顧客を再び削除しようとしたときに走る処理
+                    //削除されている顧客を更新しようとしたときに走る処理
                     ViewBag.alreadyDeleteMes = PatisserieCestBon.Properties.Settings.Default.p027_error_AlreadyDeletedCustomer;
                     ViewBag.alreadyDelete = 1;
                     return View("List");
