@@ -18,9 +18,9 @@
 </head>
 <body>
     <h2>受注ステータス変更</h2>
-    <a>受注ステータスを変更してください。</a><br />
+    <b>受注ステータスを変更してください。</b><br />
     @Html.ValidationSummary()
-    @using (Html.BeginForm("OrderUpdate2", "Order", FormMethod.Post))
+    @using (Html.BeginForm("OrderSerch2", "Order", FormMethod.Post))
     {
         foreach (var order in Model)
         {
@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <th>数量</th>
-                    <td>@Html.DisplayFor(model => order.quantity)</td>
+                    <td>@order.quantity</td>
                 </tr>
                 <tr>
                     <th>希望納期</th>
@@ -64,8 +64,12 @@
                     }
                 </tr>
             </table>
+            if (order.status != "キャンセル")
+            {
+                <input type="submit" value="変更" name="update" />
+            }
         }
-        <input type="submit" value="変更" name="update" /><input type="submit" value="検索結果に戻る" />
+        <input type="submit" value="検索結果に戻る" />
     }
 </body>
 </html>

@@ -40,8 +40,9 @@ namespace PatisserieCestBon.Controllers
                 return View(u);
             }
         }
-        public ActionResult StockUpdate2(Stock stock,string receipt, string decrease, string update)
+        public ActionResult StockUpdate2(int? quantity,DateTime? receiptDate, string receipt, string decrease, string update,decimal itemNo)
         {
+
             // セッション確認
             if (Session["loginUserName"] == null)
             {
@@ -50,46 +51,49 @@ namespace PatisserieCestBon.Controllers
             }
             using (var db = new DatabaseEntities())
             {
+                var stockList = db.Stocks.ToList();
                 if (receipt != null)
                 {
-                    var u = db.Stocks.Find(stock.itemNo);
-                    
-                    u.stock = u.stock + stock.stock;
+                    var u = db.Stocks.Find(itemNo);
+                    u.stock = u.stock + quantity;
                     db.SaveChanges();
                     ViewBag.stock = u;
-                    ModelState.AddModelError(string.Empty, PatisserieCestBon.Properties.Settings.Default.p019_info_UpdateSuccess);
-                    return Redirect("StockList");
+                    
+                    ViewBag.InfoMessage = Properties.Settings.Default.p019_info_UpdateSuccess;
+                    return View("StockList", stockList);
                 }
                 if(decrease != null)
                 {
-                    var u = db.Stocks.Find(stock.itemNo);
+                    var u = db.Stocks.Find(itemNo);
                     if (u.stock == 0)
                     {
-                        ModelState.AddModelError(string.Empty, PatisserieCestBon.Properties.Settings.Default.p020_error_StockAlreadyZero);
                         ViewBag.stock = u;
-                        return View("StockUpdate1", stock);
+                        ViewBag.ErrorMessage = Properties.Settings.Default.p020_error_StockAlreadyZero;
+                        return View("StockUpdate1",u);
                     }
-                    if (u.stock < stock.stock)
+                    if (u.stock < quantity)
                     {
-                        ModelState.AddModelError(string.Empty, PatisserieCestBon.Properties.Settings.Default.p020_error_UpdateStock);
                         ViewBag.stock = u;
-                        return View("StockUpdate1", stock);
+                        ViewBag.ErrorMessage = Properties.Settings.Default.p020_error_UpdateStock;
+                        return View("StockUpdate1",u);
                     }
                     else
                     {
-                        u.stock = u.stock - stock.stock;
+                        u.stock = u.stock - quantity;
                         db.SaveChanges();
                         ViewBag.stock = u;
-                        return Redirect("StockList");
+                        ViewBag.InfoMessage = Properties.Settings.Default.p019_info_UpdateSuccess;
+                        return View("StockList", stockList);
                     }
                 }
                 if (update != null)
                 {
-                    var u = db.Stocks.Find(stock.itemNo);
-                    u.receiptDate = stock.receiptDate;
+                    var u = db.Stocks.Find(itemNo);
+                    u.receiptDate = receiptDate;
                     db.SaveChanges();
                     ViewBag.stock = u;
-                    return Redirect("StockList");
+                    ViewBag.InfoMessage = Properties.Settings.Default.p019_info_UpdateSuccess;
+                    return View("StockList",stockList);
                 }
                 return Redirect("StockList");
             }

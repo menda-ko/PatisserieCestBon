@@ -2,6 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
+    
 }
 
 <!DOCTYPE html>
@@ -14,8 +15,16 @@
 </head>
 <body>
     <h2>在庫情報メンテナンス</h2>
-    <b>在庫情報のメンテナンスを行います。</b>
-    <b>変更したい在庫の商品名をクリックしてください。</b>
+    <b>在庫情報のメンテナンスを行います。</b><br />
+    <b>変更したい在庫の商品名をクリックしてください。</b><br />
+    @if (!string.IsNullOrWhiteSpace(ViewBag.InfoMessage))
+    {
+        <p class="text-info">@ViewBag.InfoMessage</p>
+    }
+    @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <table border="1">
         <tr>
@@ -33,7 +42,15 @@
                 }
                 <td>@Html.ActionLink(stock.itemName, "StockUpdate1", new { stock.itemNo })</td>
                 <td>@stock.stock</td>
-                <td>@stock.receiptDate</td>
+                @if (stock.receiptDate == null)
+                {
+                    <td>-</td>
+                }
+                else
+                {
+                    <td>@Html.DisplayFor(model => stock.receiptDate)</td>
+                }
+
             </tr>
         }
     </table>
