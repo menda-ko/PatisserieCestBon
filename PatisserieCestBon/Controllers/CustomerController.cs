@@ -152,7 +152,7 @@ namespace PatisserieCestBon.Controllers
             //入力項目に不備があった際に入力画面に遷移させる処理
             if (compNameCheck == 1 || addressCheck == 1 || telNoCheck == 1 || customerNameCheck == 1 ||
            customerKanaCheck == 1 || passwordCheck == 1 || retypePasswordCheck == 1 || matchPasswordCheck == 1 ||
-           formatTelNoCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
+           formatTelNoCheck == 1 || formatKanaCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
             {
                 return View("CustomerAdd1");
             }
@@ -387,7 +387,7 @@ namespace PatisserieCestBon.Controllers
             //入力項目に不備があった際に入力画面に遷移させる処理
             if (compNameCheck == 1 || addressCheck == 1 || telNoCheck == 1 || customerNameCheck == 1 ||
                customerKanaCheck == 1 || passwordCheck == 1 || retypePasswordCheck == 1 || matchPasswordCheck == 1 ||
-               formatTelNoCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
+               formatTelNoCheck == 1 || formatKanaCheck == 1 || formatEmailCheck == 1 || typeEmailCheck == 1 || typeTelCheck == 1)
             {
                 return View("Update1");
             }
