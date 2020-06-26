@@ -19,8 +19,11 @@
 <body>
     <h2>受注ステータス変更</h2>
     <b>受注ステータスを変更してください。</b><br />
-    @Html.ValidationSummary()
-    @using (Html.BeginForm("OrderSerch2", "Order", FormMethod.Post))
+    @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+    @using (Html.BeginForm("OrderUpdate2", "Order", FormMethod.Post))
     {
         foreach (var order in Model)
         {
@@ -31,29 +34,29 @@
             @Html.HiddenFor(model => order.orderSeqNo)
             @Html.HiddenFor(model => order.quantity)
             @Html.HiddenFor(model => order.itemNo)
-            <table border="1">
+            <table border="1" align="center">
                 <tr>
-                    <th>ご注文番号-明細</th>
+                    <th style="text-align:center">ご注文番号-明細</th>
                     <td>@orderNo.ToString("000000")-@seqNo.ToString("000")</td>
                 </tr>
                 <tr>
-                    <th>商品番号</th>
+                    <th style="text-align:center">商品番号</th>
                     <td>@itemNo.ToString("0000")</td>
                 </tr>
                 <tr>
-                    <th>商品名</th>
+                    <th style="text-align:center">商品名</th>
                     <td>@Html.DisplayFor(model => order.itemName)</td>
                 </tr>
                 <tr>
-                    <th>数量</th>
+                    <th style="text-align:center">数量</th>
                     <td>@order.quantity</td>
                 </tr>
                 <tr>
-                    <th>希望納期</th>
+                    <th style="text-align:center">希望納期</th>
                     <td>@Html.DisplayFor(model => order.deliveryDate)</td>
                 </tr>
                 <tr>
-                    <th>ステータス</th>
+                    <th style="text-align:center">ステータス</th>
                     @if (order.status == "キャンセル")
                     {
                         <td>@Html.DisplayFor(model => order.status)</td>

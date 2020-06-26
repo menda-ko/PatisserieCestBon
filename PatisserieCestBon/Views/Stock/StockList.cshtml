@@ -26,12 +26,12 @@
         <p class="text-danger">@ViewBag.ErrorMessage</p>
     }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <table border="1">
+    <table border="1" align="center">
         <tr>
-            <th>商品番号</th>
-            <th>商品名</th>
-            <th>数量</th>
-            <th>入荷予定日</th>
+            <th style="text-align:center">商品番号</th>
+            <th style="text-align:center">商品名</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">入荷予定日</th>
         </tr>
         @foreach (var stock in Model)
         {

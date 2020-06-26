@@ -8,7 +8,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
-using PatisserieCestBon.Models;
 
 namespace PatisserieCestBon.Controllers
 {
@@ -99,7 +98,7 @@ namespace PatisserieCestBon.Controllers
                     }
 
                     ViewBag.customerId = order.customerId.ToString("000000");
-                    ViewBag.orderNo = order.orderNo.ToString("00000000");
+                    ViewBag.orderNo = order.orderNo.ToString("000000");
                     ViewBag.deliveryFrom = deliveryFrom;
                     ViewBag.deliveryTo = deliveryTo;
                     ViewBag.orderFrom = orderFrom;
@@ -147,7 +146,7 @@ namespace PatisserieCestBon.Controllers
                     {
                         if (u.stock < order.quantity)
                         {
-                            ModelState.AddModelError(string.Empty, PatisserieCestBon.Properties.Settings.Default.p017_error_ShortageStock);
+                            ViewBag.ErrorMessage = Properties.Settings.Default.p017_error_ShortageStock;
                             return View("OrderUpdate1", list);
                         }
                         u.stock = u.stock - order.quantity;
@@ -156,7 +155,6 @@ namespace PatisserieCestBon.Controllers
                 }
                 db.SaveChanges();
                 return View("OrderUpdate2", list);
-
             }
         }
         public ActionResult OrderCancel1(OrderInfo orderInfo,int orderNo)
@@ -176,18 +174,17 @@ namespace PatisserieCestBon.Controllers
                     if (order.status != "未出荷")
                     {
                         ViewBag.ErrorMessage = Properties.Settings.Default.p011_error_CannotCancel;
-                        /*string customerId = (string)Session["loginUserName"];
-                        int customerIdInt = int.Parse(customerId);
-                        var u = from e in db.OrderInfoes
-                                 where
-                                        e.customerId == customerIdInt
-                                 group
-                                        e by e.orderNo;
-                        var orderlist = ul.ToList();*/
+                        
                         return StatusCheck();
                     }
                 }
-                return View(list);
+                var u = from e in db.OrderInfoes
+                        where
+                               e.orderNo == orderNo
+                        group
+                               e by e.orderNo;
+                var orderlist = u.ToList();
+                return View(orderlist);
             }
         }
         public ActionResult OrderCancel2(string back, string cancel,int customerId,int orderNo)

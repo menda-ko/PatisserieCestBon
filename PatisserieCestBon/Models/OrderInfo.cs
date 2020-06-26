@@ -20,9 +20,9 @@ namespace PatisserieCestBon.Models
         public decimal itemNo { get; set; }
         public string itemName { get; set; }
         public decimal quantity { get; set; }
-        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/M/dd}")]
         public System.DateTime deliveryDate { get; set; }
-        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/M/dd}")]
         public System.DateTime orderDate { get; set; }
         public string status { get; set; }
         public decimal customerId { get; set; }

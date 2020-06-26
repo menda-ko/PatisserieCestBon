@@ -30,44 +30,45 @@
         @Html.ValidationMessageFor(model => Model.stock, "", new { @class = "text-danger" })<br />
         @Html.ValidationMessageFor(model => Model.receiptDate, "", new { @class = "text-danger" })<br />
         <input type="hidden" value=@Model.itemNo name="itemNo" />
-        <table border="1">
+        <table border="1" align="center">
             <tr>
-                <th>商品番号</th>
+                <th style="text-align:center">商品番号</th>
                 <td>
                     @Model.itemNo.ToString("0000")
                 </td>
             </tr>
             <tr>
-                <th>商品名</th>
+                <th style="text-align:center">商品名</th>
                 <td>
                     @ViewBag.stock.itemName
                 </td>
             </tr>
             <tr>
-                <th>数量</th>
+                <th style="text-align:center">数量</th>
                 <td>
                     @ViewBag.stock.stock
                 </td>
             </tr>
             <tr>
-                <th>入荷予定日</th>
+                <th style="text-align:center">入荷予定日</th>
                 <td>
                     @Html.DisplayFor(model => Model.receiptDate)
                 </td>
             </tr>
         </table>
-        <table>
+        <table align="center">
             <tr>
-                <th>数量</th>
+                <th style="text-align:center">数量</th>
                 <td><input name="quantity" type="text" /></td>
                 <td><input name="receipt" type="submit" value="入荷" /><input name="decrease" type="submit" value="減少" /></td>
             </tr>
             <tr>
-                <th>入荷予定日</th>
+                <th style="text-align:center">入荷予定日</th>
                 <td><input name="receiptDate" type="text" id="receiptDate" /></td>
                 <td><input name="update" type="submit" value="更新" /></td>
             </tr>
         </table>
+        <input name="back" type="submit"value="戻る"/>
         <script type="text/javascript">
             $('#receiptDate').datepicker();
         </script>

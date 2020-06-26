@@ -40,7 +40,7 @@ namespace PatisserieCestBon.Controllers
                 return View(u);
             }
         }
-        public ActionResult StockUpdate2(int? quantity,DateTime? receiptDate, string receipt, string decrease, string update,decimal itemNo)
+        public ActionResult StockUpdate2(int? quantity,DateTime? receiptDate, string receipt, string decrease, string update,decimal itemNo,string back)
         {
 
             // セッション確認
@@ -48,6 +48,10 @@ namespace PatisserieCestBon.Controllers
             {
                 // セッションが空だったらシステムエラー
                 return RedirectToAction("EmployeeError", "Login");
+            }
+            if(back != null)
+            {
+                return StockList();
             }
             using (var db = new DatabaseEntities())
             {
